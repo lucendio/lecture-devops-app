@@ -1,0 +1,6 @@
+.local
+*.DS_Store*
+.vagrant
+.terraform
+
+*.log
