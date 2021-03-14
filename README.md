@@ -15,8 +15,8 @@ application and mess around with the source code in order to better understand h
 apart if necessary.
 Additionally, it documents various invocations that may help you adapting this application as *workload* for the exercise. 
 
-**_Please note, that this `Makefile` is only meant to showcase typical steps that need to be taken in order to automate
-the deployment lifecycle of such an application and code base.
+**_Please note, that the `Makefile` is only meant to showcase steps that are usually needed to be taken in order to
+automate the deployment lifecycle of such an application and code base.
 It is NOT recommended to invoke `make` targets from the CI/CD, but rather to utilize platform-specific interfaces 
 (e.g. `Jenkinsfile`, `.travis.yml`, etc.), which may then invoke commands shown in the `make` target or in the `scripts`
  section of one of the `package.json` files._**
@@ -30,7 +30,7 @@ The following software must be installed and available in your `${PATH}`:
 * `npm` ([npm](https://www.npmjs.com/get-npm))
 * `mongod` ([MongoDB](https://docs.mongodb.com/manual/installation/))
 
-*NOTE: [required versions](https://github.com/lucendio/lecture-devops-app/blob/master/Makefile#L14-L126)*
+*NOTE: [required versions](https://github.com/lucendio/lecture-devops-app/blob/master/hack/Makefile#L18-L20)*
 
 
 #### Option 1

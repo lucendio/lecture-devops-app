@@ -11,7 +11,8 @@ The application consists of two parts:
 * backend (`./server`)
 
 During the build process, the client code is moved into the `./public` directory within the server source code.
-Aside from providing an HTTP API, the backend also functions as a static file server for the client.
+Aside from providing an HTTP API, the backend also functions as a static file server for the client. As a result,
+backend and frontend are both bundled into a single artifact (see `make build` as an example).
 
 The following technologies have been utilized (aka. MERN-stack):
 

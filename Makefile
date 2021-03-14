@@ -14,6 +14,10 @@ LOG_DIR = $(LOCAL_DIR)/logs
 APP_NODE_MODULE_DIRS = $(foreach dir, client server, $(subst %,$(dir),$(MKFILE_DIR)/app/%/node_modules))
 
 
+# NOTE: make sure to use binaries installed via ./hack/Makefile if exist
+export PATH := $(LOCAL_DIR)/bin:$(PATH)
+
+
 
 
 default: all
@@ -119,12 +123,11 @@ run: | $(DATA_DIR)/ $(LOG_DIR)/
 
 .PHONY: deps
 deps:
-	cd $(MKFILE_DIR)/hack \
-	&& \
-		NODEJS_VERSION=12.16.3  \
-		NPM_VERSION=6.14.4      \
-		MONGODB_VERSION=4.2.6   \
-		make install
+	NODEJS_VERSION=12.21.0  \
+	NPM_VERSION=6.14.11     \
+	MONGODB_VERSION=4.2.12  \
+		make -C $(MKFILE_DIR)/hack \
+		install
 	@echo ''
 	@echo 'In order to use the installed dependencies, the $$PATH variable must be adjusted.'
 	@echo 'Run:'
