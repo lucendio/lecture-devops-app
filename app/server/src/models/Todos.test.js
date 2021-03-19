@@ -3,6 +3,18 @@ const dbClientInstance_ = require( '../db/mongo.js' );
 
 const { model: Todos } = require( './Todos.js' );
 
+describe('Model: Todos', () => {
+    test('create a todo and check propertes', () => {
+        const todoData = {
+            title: 'Homework',
+            description: 'Devops project 2020',
+            user: 1
+        };
+
+        const toDo = Todos(todoData);
+        expect(toDo.title).toEqual("Homework");
+    })
+})
 
 describe( 'Model: Todos', ()=>{
     beforeAll( async ()=>{

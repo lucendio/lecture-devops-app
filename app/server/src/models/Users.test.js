@@ -2,6 +2,18 @@ const dbClientInstance_ = require( './../db/mongo.js' );
 
 const { model: Users } = require( './Users.js' );
 
+describe('Model: User', () => {
+    test('create a user and check propertes', () => {
+        const userData = {
+            name: 'myname',
+            email: 'myname@example.com',
+            password: 'mypassword'
+        };
+
+        const user = Users(userData);
+        expect(user.name).toEqual("myname");
+    })
+})
 
 describe( 'Model: Users', ()=>{
     beforeAll( async ()=>{
