@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, fireEvent } from '@testing-library/react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
 import App from './App';
 
 // NOTE: suppress virtual console output
@@ -20,18 +20,18 @@ test('renders a header container', () => {
 
 test('renders a login form', async () => {
   const { getByText } = render(<App />);
-  await waitForElement(() => getByText(/Sign in/i));
-  await waitForElement(() => getByText(/Email/i));
-  await waitForElement(() => getByText(/Password/i));
-  await waitForElement(() => getByText(/Login/i));
+  await waitFor(() => getByText(/Sign in/i));
+  await waitFor(() => getByText(/Email/i));
+  await waitFor(() => getByText(/Password/i));
+  await waitFor(() => getByText(/Login/i));
 });
 
 test('renders registration form when register button clicked', async () => {
   const { getByText } = render(<App />);
-  await waitForElement(() => getByText(/Signup/i));
+  await waitFor(() => getByText(/Signup/i));
   fireEvent.click(getByText('Signup'));
-  await waitForElement(() => getByText(/Your name/i));
-  await waitForElement(() => getByText(/Your email/i));
-  await waitForElement(() => getByText(/Your password/i));
-  await waitForElement(() => getByText(/Create User/i));
+  await waitFor(() => getByText(/Your name/i));
+  await waitFor(() => getByText(/Your email/i));
+  await waitFor(() => getByText(/Your password/i));
+  await waitFor(() => getByText(/Create User/i));
 });
