@@ -72,6 +72,7 @@ class AddTodo extends Component {
                             value={this.state.title}
                             onChange={this.handleTitleChange}
                             label="ToDo Title"
+                            id="todoTitle" /* required for the label to be associated (for="") with the input */
                             background
                             size={(this.state.titleError) ? "lg inputErrorDiv" : "lg"}
                             className={(this.state.titleError) ? "inputError" : ""}
@@ -89,6 +90,7 @@ class AddTodo extends Component {
                             onChange={this.handleDescriptionChange}
                             type="textarea"
                             label="ToDo Description"
+                            id="todoDescription" /* required for the label to be associated (for="") with the input */
                             background
                             maxLength={250}
                         />
