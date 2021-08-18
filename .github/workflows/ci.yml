@@ -36,6 +36,7 @@ jobs:
 
         - name: Build server
           run: |
+            rm -rf temp
             echo "Creating temp directory"
             mkdir temp
             echo "Copying server source to temp directory"
@@ -53,13 +54,26 @@ jobs:
             echo "Changing to client directory"
             cd ./app/client
             echo "Running build.js"
-            node ./scripts/build.js
+            PUBLIC_URL = 'http://127.0.0.1:3001'  BUILD_PATH = './temp/public' node ./scripts/build.js
 
         - name: Test client
           run: |
             cd ./app/client
-            echo "Running client test"
+            echo "Running client tests"
             npm run test
+
+        - name: Generate random string
+          run: |
+            echo "randomString=LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1" >> $GITHUB_ENV
+
+        - name: Test server
+          run: |
+          cd ./app/server
+          echo "Running server tests"
+          PORT = '3002' MONGODB_URL = 'mongodb://localhost:27017/${{ env.randomString }}' JWT_SECRET = '{{ env.randomString }}$' npm run test
+          env:
+            randomString:
+
 
       # TODO do not invoke make
 
