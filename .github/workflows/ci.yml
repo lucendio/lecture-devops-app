@@ -68,13 +68,13 @@ jobs:
 
         - name: Test server
           run: |
-          cd ./app/server
-          cat dev.env
-          #export PORT='3002'
-          #export MONGODB_URL='mongodb://localhost:27017/'${{ env.randomString }}
-          #export JWT_SECRET=${{ env.randomString }}
-          #echo "Running server tests"
-          npm run test
+            cd ./app/server
+            cat dev.env
+            export PORT='3002'
+            export MONGODB_URL='mongodb://localhost:27017/'${{ env.randomString }}
+            export JWT_SECRET=${{ env.randomString }}
+            echo "Running server tests"
+            npm run test
 
       # TODO do not invoke make
 
