@@ -49,6 +49,9 @@ jobs:
     - name: Install webpack
       run: npm install webpack
 
+    - name: Install resolve
+      run: npm install resolve
+
     - name: Build application
       run: make build
 
