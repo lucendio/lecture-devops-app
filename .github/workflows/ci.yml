@@ -71,9 +71,6 @@ jobs:
           cd ./app/server
           echo "Running server tests"
           npm run test -- -PORT=3002 -MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }} -JWT_SECRET=${{ env.randomString }}
-          env:
-            randomString:
-
 
       # TODO do not invoke make
 
