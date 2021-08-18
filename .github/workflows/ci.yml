@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ master ]
 
-stages:
-  - build:
+jobs:
+    install:
         runs-on: ubuntu-latest
 
         strategy:
