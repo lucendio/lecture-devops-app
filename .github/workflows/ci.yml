@@ -52,6 +52,9 @@ jobs:
     - name: Install resolve
       run: npm install resolve
 
+    - name: Make install
+      run: make install
+
     - name: Build application
       run: make build
 
