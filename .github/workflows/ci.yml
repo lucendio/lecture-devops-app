@@ -70,7 +70,7 @@ jobs:
           run: |
           cd ./app/server
           echo "Running server tests"
-          PORT = '3002' MONGODB_URL = 'mongodb://localhost:27017/${{ env.randomString }}' JWT_SECRET = '{{ env.randomString }}$' npm run test
+          npm run test -- -PORT=3002 -MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }} -JWT_SECRET=${{ env.randomString }}
           env:
             randomString:
 
