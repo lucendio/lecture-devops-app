@@ -44,8 +44,8 @@ jobs:
           run: npm install
 
         - name: Install dependencies
-          install: $(APP_NODE_MODULE_DIRS)
-          $(APP_NODE_MODULE_DIRS): cd $(@D) \ && npm install
+          run:  echo $(APP_NODE_MODULE_DIRS)
+          #$(APP_NODE_MODULE_DIRS): cd $(@D) \ && npm install
 
 
       # TODO do not invoke make
