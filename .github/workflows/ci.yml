@@ -36,16 +36,13 @@ jobs:
           with:
             mongodb-version: ${{ matrix.mongodb-version }}
 
-        - name: Install npm
-          run: npm install
-
         - name: Install server dependencies
           working-directory: ./app/server
-          run: yarn
+          run: npm install
 
         - name: Install client dependencies
           working-directory: ./app/client
-          run: yarn
+          run: npm install
 
 
       # TODO do not invoke make
