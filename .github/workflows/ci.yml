@@ -10,8 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-    install:
-      name: Install dependencies
+    install-build-test:
         runs-on: ubuntu-latest
 
         steps:
@@ -35,11 +34,6 @@ jobs:
           working-directory: ./app/client
           run: npm install
 
-    build:
-      name: Build server and client
-      needs: install
-
-      steps:
         - name: Build server
           run: |
             echo "Current directory"
