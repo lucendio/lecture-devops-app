@@ -36,8 +36,6 @@ jobs:
 
         - name: Build server
           run: |
-            echo "Current directory"
-            ls
             echo "Creating temp directory"
             mkdir temp
             echo "Copying server source to temp directory"
@@ -47,12 +45,15 @@ jobs:
             echo "Installing server dependencies"
             cd temp
             npm install --prod --no-audit --no-fund
+            echo "Removing package files"
             rm -rf ./package*
 
         - name: Build client
           run: |
-            cd ./app/client/scripts
-            node build.js
+            echo "Changing to client directory"
+            cd ./app/client
+            echo "Running build.js"
+            node ./scripts/build.js
 
       # TODO do not invoke make
 
