@@ -9,58 +9,57 @@ on:
   pull_request:
     branches: [ master ]
 
-jobs:
-  build:
+stages:
+  - build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [14.x]
+            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+            mongodb-version: ['4.2']
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        mongodb-version: ['4.2']
+        variables:
+          APP_NODE_MODULE_DIRS: $(foreach dir, client server, $(subst %,$(dir),$(MKFILE_DIR)/app/%/node_modules))
+          MKFILE_DIR: $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
-    steps:
-    - name: Git checkout
-      uses: actions/checkout@v2
+        steps:
+        - name: Git checkout
+          uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: app/server/package-lock.json
-        #cache-dependency-path: app/client/package-lock.json
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: 'npm'
+            cache-dependency-path: app/server/package-lock.json
+            #cache-dependency-path: app/client/package-lock.json
 
-    - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.6.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
+        - name: Start MongoDB ${{ matrix.mongodb-version }}
+          uses: supercharge/mongodb-github-action@1.6.0
+          with:
+            mongodb-version: ${{ matrix.mongodb-version }}
 
-    - name: Install dependencies
-      run: npm install
+        - name: Install npm
+          run: npm install
 
-    - name: Install react dev utils
-      run: npm install --save-dev react-dev-utils
+        - name: Install dependencies
+          install: $(APP_NODE_MODULE_DIRS)
+          $(APP_NODE_MODULE_DIRS):
+	           cd $(@D) \ && npm install
 
-    - name: Install fs-extra
-      run: npm install fs-extra
 
-    - name: Install webpack
-      run: npm install webpack
+      # TODO do not invoke make
 
-    - name: Install resolve
-      run: npm install resolve
+    #- name: Make install
+    #  run: make install
 
-    - name: Make install
-      run: make install
+    #- name: Build application
+    #  run: make build
 
-    - name: Build application
-      run: make build
+    #- name: Test application
+    #  run: make test
 
-    - name: Test application
-      run: make test
-
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    #- run: npm ci
+    #- run: npm run build --if-present
+    #- run: npm test
