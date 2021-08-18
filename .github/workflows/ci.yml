@@ -53,8 +53,10 @@ jobs:
           run: |
             echo "Changing to client directory"
             cd ./app/client
+            export PUBLIC_URL = 'http://127.0.0.1:3001'
+            export BUILD_PATH = './temp/public'
             echo "Running build.js"
-            PUBLIC_URL = 'http://127.0.0.1:3001'  BUILD_PATH = './temp/public' node ./scripts/build.js
+            node ./scripts/build.js
 
         - name: Test client
           run: |
