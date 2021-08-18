@@ -39,6 +39,8 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+
+    - name: Install react dependencies
       run: npm install --save-dev react-dev-utils
 
     - name: Build application
