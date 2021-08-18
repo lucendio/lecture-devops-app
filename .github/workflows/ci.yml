@@ -19,10 +19,6 @@ jobs:
             # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
             mongodb-version: ['4.2']
 
-        variables:
-          APP_NODE_MODULE_DIRS: $(foreach dir, client server, $(subst %,$(dir),$(MKFILE_DIR)/app/%/node_modules))
-          MKFILE_DIR: $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
-
         steps:
         - name: Git checkout
           uses: actions/checkout@v2
@@ -43,9 +39,13 @@ jobs:
         - name: Install npm
           run: npm install
 
-        - name: Install dependencies
-          run:  echo $(APP_NODE_MODULE_DIRS)
-          #$(APP_NODE_MODULE_DIRS): cd $(@D) \ && npm install
+        - name: Install server dependencies
+          working-directory: ./app/server
+          run: yarn
+
+        - name: Install client dependencies
+          working-directory: ./app/client
+          run: yarn
 
 
       # TODO do not invoke make
