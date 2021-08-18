@@ -13,37 +13,49 @@ jobs:
     install:
         runs-on: ubuntu-latest
 
-        strategy:
-          matrix:
-            node-version: [14.x]
-            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-            mongodb-version: ['4.2']
-
         steps:
         - name: Git checkout
           uses: actions/checkout@v2
 
-        - name: Use Node.js ${{ matrix.node-version }}
+        - name: Use Node.js 14.x
           uses: actions/setup-node@v1
           with:
-            node-version: ${{ matrix.node-version }}
+            node-version: 14.x
             cache: 'npm'
-            cache-dependency-path: app/server/package-lock.json
+            #cache-dependency-path: app/server/package-lock.json
             #cache-dependency-path: app/client/package-lock.json
 
-        - name: Start MongoDB ${{ matrix.mongodb-version }}
+        - name: Start MongoDB '4.2'
           uses: supercharge/mongodb-github-action@1.6.0
           with:
-            mongodb-version: ${{ matrix.mongodb-version }}
-
-        - name: Install server dependencies
-          working-directory: ./app/server
-          run: npm install
+            mongodb-version: '4.2'
 
         - name: Install client dependencies
           working-directory: ./app/client
           run: npm install
 
+    build:
+
+      steps:
+        - name: Build server
+          run: |
+            echo "Current directory"
+            ls
+            echo "Creating temp directory"
+            mkdir temp
+            echo "Copying server source to temp directory"
+            cp -r ./app/server/src temp
+            echo "Copying package files to temp directory"
+            cp ./app/server/package* temp/
+            echo "Installing server dependencies"
+            cd temp
+            npm install --prod --no-audit --no-fund
+            rm -rf ./package*
+
+        - name: Build client
+          run: |
+            cd ./app/client/scripts
+            node build.js
 
       # TODO do not invoke make
 
