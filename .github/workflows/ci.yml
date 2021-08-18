@@ -45,8 +45,7 @@ stages:
 
         - name: Install dependencies
           install: $(APP_NODE_MODULE_DIRS)
-          $(APP_NODE_MODULE_DIRS):
-	           cd $(@D) \ && npm install
+          $(APP_NODE_MODULE_DIRS): cd $(@D) \ && npm install
 
 
       # TODO do not invoke make
