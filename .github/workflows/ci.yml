@@ -55,6 +55,12 @@ jobs:
             echo "Running build.js"
             node ./scripts/build.js
 
+        - name: Test client
+          run: |
+            cd ./app/client
+            echo "Running client test"
+            npm run test
+
       # TODO do not invoke make
 
     #- name: Make install
