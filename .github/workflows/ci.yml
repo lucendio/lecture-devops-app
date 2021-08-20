@@ -12,7 +12,7 @@ on:
 jobs:
     install-build-test:
         runs-on: ubuntu-latest
-        
+
         steps:
         - name: Git checkout
           uses: actions/checkout@v2
@@ -56,18 +56,19 @@ jobs:
             echo "Building client"
             node ./scripts/build.js
 
+        - name: Generate random random string variable for server testing
+        - run: echo RANDOM_STRING=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1) >> $GITHUB_ENV
+
         - name: Test client & server
           run: |
             cd ./app/client
             echo "Running client tests"
             npm run test
             cd ../../app/server
-            echo "Generating random string"
-            RANDOM_STRING=echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-            echo "Random string: $RANDOM_STRING"
+            echo "Random string: ${{ env.RANDOM_STRING }}"
             export PORT=3002
-            export MONGODB_URL=mongodb://localhost:27017/$RANDOM_STRING
-            export JWT_SECRET=$RANDOM_STRING
+            export MONGODB_URL=mongodb://localhost:27017/${{ env.RANDOM_STRING }}
+            export JWT_SECRET=${{ env.RANDOM_STRING }}
             echo "Running server tests"
             npm run test
 
