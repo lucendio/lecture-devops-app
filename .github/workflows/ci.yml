@@ -39,11 +39,11 @@ jobs:
           run: npm install
 
         - name: Build server & client
-          working-directory: ./app
           run: |
             echo "Creating temp directory"
             mkdir -p ./.local/temp
             rm -rf ./.local/temp
+            ls -a
             echo "Copying server source to temp directory"
             cp -r ./app/server/src ./.local/temp
             echo "Copying package files to temp directory"
