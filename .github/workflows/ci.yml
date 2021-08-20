@@ -64,10 +64,9 @@ jobs:
             echo "Running client tests"
             npm run test
 
+# echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
         - name: Generate random string
-          run: |
-          # echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
-          echo "randomString=jkshdf38928" >> $GITHUB_ENV
+          run: echo "randomString=jkshdf38928" >> $GITHUB_ENV
 
         - name: Test server
           run: |
