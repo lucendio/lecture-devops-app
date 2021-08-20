@@ -52,9 +52,7 @@ jobs:
             npm install --prod --no-audit --no-fund
             echo "Removing package files"
             rm -rf ./package*
-            cd ..
-            cd ..
-            cd app/client
+            cd ../../app/client
             export PUBLIC_URL=http://127.0.0.1:3001
             export BUILD_PATH="./.local/temp/public"
             echo "Building client"
@@ -68,7 +66,7 @@ jobs:
             cd ./app/client
             echo "Running client tests"
             npm run test
-            cd ./app/server
+            cd ../../app/server
             export PORT=3002
             export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
             export JWT_SECRET=${{ env.randomString }}
