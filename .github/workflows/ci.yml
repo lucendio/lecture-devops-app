@@ -34,37 +34,44 @@ jobs:
           working-directory: ./app/client
           run: npm install
 
-        - name: Install server dependencies and build
+        - name: Install server dependencies
+          working-directory: ./app/server
+          run: npm install
+
+        - name: Build server & client
           working-directory: ./app
           run: |
-            rm -rf temp
             echo "Creating temp directory"
-            mkdir temp
+            mkdir -p ./.local/temp
+            rm -rf ./.local/temp
             echo "Copying server source to temp directory"
-            cp -r ./app/server/src temp
+            cp -r ./app/server/src ./.local/temp
             echo "Copying package files to temp directory"
-            cp ./app/server/package* temp/
+            cp ./app/server/package* ./.local/temp/
             echo "Installing server dependencies"
-            cd temp
+            cd ./.local/temp/
             npm install --prod --no-audit --no-fund
-            echo "Installing jest"
-            npm install --save-dev jest
             echo "Removing package files"
             rm -rf ./package*
-
-        - name: Build client
-          run: |
-            echo "Changing to client directory"
             cd ./app/client
-            export PUBLIC_URL='http://127.0.0.1:3001'
-            export BUILD_PATH='./temp/public'
-            echo "Running build.js"
+            export PUBLIC_URL=http://127.0.0.1:3001
+            export BUILD_PATH="./.local/temp/public"
+            echo "Building client"
             node ./scripts/build.js
 
-        - name: Test client
+        - name: Generate random string
+          run: echo "randomString=jkshdf38928" >> $GITHUB_ENV
+
+        - name: Test client & server
           run: |
             cd ./app/client
             echo "Running client tests"
+            npm run test
+            cd ./app/server
+            export PORT=3002
+            export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
+            export JWT_SECRET=${{ env.randomString }}
+            echo "Running server tests"
             npm run test
 
 # echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
@@ -74,17 +81,6 @@ jobs:
 #MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
 #JWT_SECRET=${{ env.randomString }}
 #ENDOFFILE
-        - name: Generate random string
-          run: echo "randomString=jkshdf38928" >> $GITHUB_ENV
-
-        - name: Test server
-          run: |
-            cd ./app/server
-            export PORT=3002
-            export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
-            export JWT_SECRET=${{ env.randomString }}
-            echo "Running server tests"
-            npm run test
 
       # TODO Clean
       # TODO temp directory for server test?
