@@ -66,7 +66,8 @@ jobs:
 
         - name: Generate random string
           run: |
-            echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
+          # echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
+          echo "randomString=jkshdf38928" >> $GITHUB_ENV
 
         - name: Test server
           run: |
@@ -83,17 +84,4 @@ jobs:
             echo "Running server tests"
             npm run test
 
-      # TODO do not invoke make
-
-    #- name: Make install
-    #  run: make install
-
-    #- name: Build application
-    #  run: make build
-
-    #- name: Test application
-    #  run: make test
-
-    #- run: npm ci
-    #- run: npm run build --if-present
-    #- run: npm test
+      # TODO Clean
