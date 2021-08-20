@@ -14,6 +14,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+          - name: Generate random string
+            run: |
+              echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
+              echo "randomString="$(echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)) >> $GITHUB_ENV
+
         - name: Git checkout
           uses: actions/checkout@v2
 
@@ -22,8 +27,6 @@ jobs:
           with:
             node-version: 14.x
             cache: 'npm'
-            #cache-dependency-path: app/server/package-lock.json
-            #cache-dependency-path: app/client/package-lock.json
 
         - name: Start MongoDB '4.2'
           uses: supercharge/mongodb-github-action@1.6.0
@@ -60,7 +63,7 @@ jobs:
 
         - name: Generate random string
           run: |
-            echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1))
+            echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
             echo "randomString="$(echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)) >> $GITHUB_ENV
 
         - name: Test client & server
