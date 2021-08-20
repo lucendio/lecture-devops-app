@@ -59,7 +59,7 @@ jobs:
             node ./scripts/build.js
 
         - name: Generate random string
-          run: echo "randomString=$(shell LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
+          run: echo "randomString=$(echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1))" >> $GITHUB_ENV
 
         - name: Test client & server
           run: |
