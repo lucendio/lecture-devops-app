@@ -43,7 +43,6 @@ jobs:
             echo "Creating temp directory"
             mkdir -p ./.local/temp
             rm -rf ./.local/temp
-            ls -a
             echo "Copying server source to temp directory"
             cp -r ./app/server/src ./.local/temp
             echo "Copying package files to temp directory"
@@ -53,6 +52,8 @@ jobs:
             npm install --prod --no-audit --no-fund
             echo "Removing package files"
             rm -rf ./package*
+            cd ..
+            cd ..
             cd app/client
             export PUBLIC_URL=http://127.0.0.1:3001
             export BUILD_PATH="./.local/temp/public"
