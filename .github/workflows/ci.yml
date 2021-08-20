@@ -71,15 +71,15 @@ jobs:
         - name: Test server
           run: |
             cd ./app/server
-            rm dev.env
-            export PORT='3002'
-            export MONGODB_URL='mongodb://localhost:27017/'${{ env.randomString }}
+          #rm dev.env
+            export PORT=3002
+            export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
             export JWT_SECRET=${{ env.randomString }}
-            cat > /dev.env << ENDOFFILE
-            PORT=3002
-            MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
-            JWT_SECRET=${{ env.randomString }}
-            ENDOFFILE
+          #cat > /dev.env << ENDOFFILE
+          #PORT=3002
+          #MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
+          #JWT_SECRET=${{ env.randomString }}
+          #ENDOFFILE
             echo "Running server tests"
             npm run test
 
