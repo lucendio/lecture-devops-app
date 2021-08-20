@@ -76,7 +76,7 @@ jobs:
 
         - name: Test server
           run: |
-            cd ./app/server
+            cd ./temp/server
             export PORT=3002
             export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
             export JWT_SECRET=${{ env.randomString }}
@@ -84,3 +84,4 @@ jobs:
             npm run test
 
       # TODO Clean
+      # TODO temp directory for server test?
