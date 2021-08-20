@@ -53,7 +53,7 @@ jobs:
             npm install --prod --no-audit --no-fund
             echo "Removing package files"
             rm -rf ./package*
-            cd ./app/client
+            cd app/client
             export PUBLIC_URL=http://127.0.0.1:3001
             export BUILD_PATH="./.local/temp/public"
             echo "Building client"
