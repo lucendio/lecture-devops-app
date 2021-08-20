@@ -48,6 +48,8 @@ jobs:
             npm install --prod --no-audit --no-fund
             echo "Removing package files"
             rm -rf ./package*
+            echo "Installing jest"
+            npm install --save-dev jest
 
         - name: Build client
           run: |
@@ -76,7 +78,7 @@ jobs:
 
         - name: Test server
           run: |
-            cd ./temp/server
+            cd ./app/server
             export PORT=3002
             export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
             export JWT_SECRET=${{ env.randomString }}
