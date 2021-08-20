@@ -59,7 +59,9 @@ jobs:
             node ./scripts/build.js
 
         - name: Generate random string
-          run: echo "randomString=jkshdf38928" >> $GITHUB_ENV
+          run: echo "randomString=$RANDOM_STRING" >> $GITHUB_ENV
+          env:
+            RANDOM_STRING: $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
 
         - name: Test client & server
           run: |
@@ -68,12 +70,10 @@ jobs:
             npm run test
             cd ../../app/server
             export PORT=3002
-            export MONGODB_URL=mongodb://localhost:27017/$RANDOM_STRING
-            export JWT_SECRET=$RANDOM_STRING
+            export MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
+            export JWT_SECRET=${{ env.randomString }}
             echo "Running server tests"
             npm run test
-          env:
-            RANDOM_STRING: $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
 
 # echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
 #rm dev.env
