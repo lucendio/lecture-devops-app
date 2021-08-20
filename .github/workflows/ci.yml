@@ -63,19 +63,23 @@ jobs:
             cd ./app/client
             echo "Running client tests"
             npm run test
-##echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
+
         - name: Generate random string
           run: |
-            echo "randomString=W71EBe3iM2yt1i36ugYf0CHEqWppsRY8" >> $GITHUB_ENV
-            echo ${{ env.randomString }}
+            echo "randomString=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
 
         - name: Test server
           run: |
             cd ./app/server
-            cat dev.env
+            rm dev.env
             export PORT='3002'
             export MONGODB_URL='mongodb://localhost:27017/'${{ env.randomString }}
             export JWT_SECRET=${{ env.randomString }}
+            cat > /dev.env << ENDOFFILE
+            PORT=3002
+            MONGODB_URL=mongodb://localhost:27017/${{ env.randomString }}
+            JWT_SECRET=${{ env.randomString }}
+            ENDOFFILE
             echo "Running server tests"
             npm run test
 
