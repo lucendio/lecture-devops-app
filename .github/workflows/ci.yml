@@ -36,7 +36,7 @@ jobs:
           working-directory: ./app/server
           run: npm install
 
-        - name: Build server & client
+        - name: Build server
           run: |
             echo "Creating temp directory"
             mkdir -p ./.local/temp
@@ -50,16 +50,14 @@ jobs:
             npm install --prod --no-audit --no-fund
             echo "Removing package files"
             rm -rf ./package*
-            cd ../../app/client
+
+        - name: Build client
+          working-directory: ./app/client
+          run: |
             export PUBLIC_URL=http://127.0.0.1:3001
             export BUILD_PATH="./.local/temp/public"
             echo "Building client"
             node ./scripts/build.js
-
-        - name: Generate random string for server testing
-          run: |
-            echo "RANDOM_STRING=$(echo $(openssl rand -hex 20))" >> $GITHUB_ENV
-      #echo "RANDOM_STRING=$(echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1))" >> $GITHUB_ENV
 
         - name: Test client
           working-directory: ./app/client
@@ -67,15 +65,16 @@ jobs:
             echo "Running client tests"
             npm run test
 
+        - name: Generate random string for server testing
+          run: |
+            echo "RANDOM_STRING=$(echo $(openssl rand -hex 20))" >> $GITHUB_ENV
+
         - name: Test server
           working-directory: ./app/server
           run: |
-            echo "JWT: $echo ${{ env.RANDOM_STRING }}"
+            echo "JWT: ${{ env.RANDOM_STRING }}"
             export PORT=3002
             export MONGODB_URL=mongodb://localhost:27017/${{ env.RANDOM_STRING }}
             export JWT_SECRET=${{ env.RANDOM_STRING }}
             echo "Running server tests"
             npm run test
-
-      # TODO Clean
-      # TODO random string
