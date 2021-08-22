@@ -56,8 +56,14 @@ jobs:
             echo "Building client"
             node ./scripts/build.js
 
-        - name: Generate random random string variable for server testing
-          run: echo "RANDOM_STRING=$(echo $LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
+        - name: Generate JWT for server testing
+          id: jwt-generator
+          uses: morzzz007/github-actions-jwt-generator@1.0.1
+          with:
+            secret: ciSecret
+            payload: '{"devops":"cilecture"}'
+
+  #echo "RANDOM_STRING=$(echo $LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
 
         - name: Test client & server
           run: |
@@ -65,10 +71,10 @@ jobs:
             echo "Running client tests"
             npm run test
             cd ../../app/server
-            echo "Random string: ${{ env.RANDOM_STRING }}"
+            echo "JWT: ${{ steps.jwt-generator.outputs.token }}"
             export PORT=3002
-            export MONGODB_URL=mongodb://localhost:27017/${{ env.RANDOM_STRING }}
-            export JWT_SECRET=${{ env.RANDOM_STRING }}
+            export MONGODB_URL=mongodb://localhost:27017/${{ steps.jwt-generator.outputs.token }}
+            export JWT_SECRET=${{ steps.jwt-generator.outputs.token }}
             echo "Running server tests"
             npm run test
 
