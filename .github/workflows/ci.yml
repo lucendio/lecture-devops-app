@@ -58,8 +58,9 @@ jobs:
 
         - name: Generate random random string variable for server testing
           run: |
-            RANDOM_STRING=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-            echo $RANDOM_STRING >> $GITHUB_ENV
+            which tr
+            which fold
+            echo "RANDOM_STRING=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
 
         - name: Test client & server
           run: |
