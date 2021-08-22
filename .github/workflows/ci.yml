@@ -71,7 +71,7 @@ jobs:
             echo "Running client tests"
             npm run test
             cd ../../app/server
-            echo "JWT: ${{ steps.jwt-generator.outputs.token }}"
+            echo "JWT: $echo ${{ steps.jwt-generator.outputs.token }}"
             export PORT=3002
             export MONGODB_URL=mongodb://localhost:27017/${{ steps.jwt-generator.outputs.token }}
             export JWT_SECRET=${{ steps.jwt-generator.outputs.token }}
