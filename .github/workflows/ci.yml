@@ -58,15 +58,18 @@ jobs:
 
         - name: Generate random string for server testing
           run: |
-            echo"RANDOM_STRING=$(echo $(openssl rand -hex 20))" >> $GITHUB_ENV
+            echo "RANDOM_STRING=$(echo $(openssl rand -hex 20))" >> $GITHUB_ENV
       #echo "RANDOM_STRING=$(echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1))" >> $GITHUB_ENV
 
-        - name: Test client & server
+        - name: Test client
+          working-directory: ./app/client
           run: |
-            cd ./app/client
             echo "Running client tests"
             npm run test
-            cd ../../app/server
+
+        - name: Test server
+          working-directory: ./app/server
+          run: |
             echo "JWT: $echo ${{ env.RANDOM_STRING }}"
             export PORT=3002
             export MONGODB_URL=mongodb://localhost:27017/${{ env.RANDOM_STRING }}
