@@ -56,14 +56,10 @@ jobs:
             echo "Building client"
             node ./scripts/build.js
 
-        - name: Generate JWT for server testing
-          id: jwt-generator
-          uses: morzzz007/github-actions-jwt-generator@1.0.1
-          with:
-            secret: ciSecret
-            payload: '{"devops":"cilecture"}'
-
-  #echo "RANDOM_STRING=$(echo $LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)" >> $GITHUB_ENV
+        - name: Generate random string for server testing
+          run: |
+            echo $(openssl rand -hex 20)
+            echo "RANDOM_STRING=$(echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1))" >> $GITHUB_ENV
 
         - name: Test client & server
           run: |
