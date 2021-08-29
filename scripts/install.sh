@@ -8,6 +8,7 @@ if [ -e /etc/redhat-release ] ; then
 fi
 
 TERRAFORM_VERSION="1.0.5"
+
 # create new ssh key
 [[ ! -f /home/ubuntu/.ssh/mykey ]] \
 && mkdir -p /home/ubuntu/.ssh \
@@ -17,10 +18,11 @@ TERRAFORM_VERSION="1.0.5"
 # install packages
 if [ ${REDHAT_BASED} ] ; then
   yum -y update
+  yum install -y unzip wget
 else 
   apt-get update
+  apt-get -y install unzip 
 fi
-
 
 #terraform
 T_VERSION=$(/usr/local/bin/terraform -v | head -1 | cut -d ' ' -f 2 | tail -c +2)
@@ -30,6 +32,7 @@ T_RETVAL=${PIPESTATUS[0]}
 && wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
 && unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin \
 && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
 
 
 # clean up
