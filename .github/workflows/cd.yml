@@ -1,10 +1,6 @@
 name: CD
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - master
   workflow_dispatch:
     inputs:
       aws-session-token:
