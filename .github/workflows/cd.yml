@@ -3,10 +3,8 @@ name: CD
 on:
   workflow_dispatch:
     inputs:
-      aws-session-token:
-        description: 'Session token'
-        required: true
-        default: 'NA'
+      token:
+        description: 'AWS session token'
 
 jobs:
   deploy:
@@ -22,7 +20,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ github.event.input.aws-session-token }}
+          aws-session-token: ${{ github.event.inputs.token }}
           aws-region: us-east-1
 
       - name: Packer init
