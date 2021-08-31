@@ -5,6 +5,8 @@ on:
     inputs:
       token:
         description: 'AWS session token'
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -31,7 +33,6 @@ jobs:
       - name: Packer init
         run: packer init .
 
-      # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
         with:
@@ -39,7 +40,6 @@ jobs:
           arguments: -syntax-only
           target: packer.pkr.hcl
 
-      # build artifact
       - name: Build Artifact
         run: packer build packer.pkr.hcl
 
