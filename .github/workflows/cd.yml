@@ -15,12 +15,8 @@ jobs:
         if: github.event.pull_request.merged
         uses: actions/checkout@v2
 
-      # fix backwards incompatibilities in template
-      - name: Fix Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: fix
-          target: packer.pkr.hcl
+      - name: Packer init
+        run: packer init .
 
       # validate templates
       - name: Validate Template
@@ -39,5 +35,8 @@ jobs:
           target: packer.pkr.hcl
         env:
           PACKER_LOG: 1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-west-1
 
       # additional steps to process artifacts

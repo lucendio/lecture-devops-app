@@ -1,18 +1,16 @@
-variable "region" {
-  type    = string
-  default = "us-east-1"
+packer {
+  required_plugins {
+    amazon = {
+      version = ">= 0.0.2"
+      source  = "github.com/hashicorp/amazon"
+    }
+  }
 }
 
-locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
-
-
-# source blocks are generated from your builders; a source can be referenced in
-# build blocks. A build block runs provisioners and post-processors on a
-# source.
-source "amazon-ebs" "example" {
-  ami_name      = "learn-terraform-packer-${local.timestamp}"
+source "amazon-ebs" "ubuntu" {
+  ami_name      = "learn-packer-linux-aws"
   instance_type = "t2.micro"
-  region        = var.region
+  region        = "eu-west-1"
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*"
@@ -25,11 +23,10 @@ source "amazon-ebs" "example" {
   ssh_username = "ubuntu"
 }
 
-# a build block invokes sources and runs provisioning steps on them.
 build {
-  sources = ["source.amazon-ebs.example"]
+  sources = ["source.amazon-ebs.ubuntu"]
 
   provisioner "shell" {
-    script = "../scripts/setup_packer.sh"
+    script = "./scripts/setup_packer.sh"
   }
 }
