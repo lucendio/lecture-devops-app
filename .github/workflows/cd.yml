@@ -15,6 +15,12 @@ jobs:
         if: github.event.pull_request.merged
         uses: actions/checkout@v2
 
+      - name: Unset variables
+        run: |
+          unset AWS_ACCESS_KEY_ID
+          unset AWS_SECRET_ACCESS_KEY
+          unset AWS_SESSION_TOKEN
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
