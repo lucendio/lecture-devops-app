@@ -21,7 +21,10 @@ if [ ${REDHAT_BASED} ] ; then
   yum install -y unzip wget
 else 
   apt-get update
-  apt-get -y install unzip 
+  apt-get -y install unzip
+  apt-get install -y python-pip
+  apt-get install awscli 
+  pip install awscli
 fi
 
 #terraform
@@ -32,8 +35,6 @@ T_RETVAL=${PIPESTATUS[0]}
 && wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
 && unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin \
 && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-
-
 
 # clean up
 if [ ! ${REDHAT_BASED} ] ; then
