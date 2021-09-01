@@ -67,3 +67,25 @@ resource "aws_security_group" "DevOps_Sec_Group" {
       Name = "allow traffic"
   }
 }
+
+
+# Create route table and association
+resource "aws_route_table" "DevOps_RouteTable" {
+    vpc_id = aws_vpc.DevOps-VPC.id
+
+    route {
+        cidr_block = "0.0.0.0/0"
+        # fetch internet gatway id
+        gateway_id = aws_internet_gateway.DevOps-IntGW.id
+    }
+
+    tags = {
+        Name = "DevOps_Routetable"
+    }
+}
+
+# Create route table association between subnet and route table
+resource "aws_route_table_association" "DevOps_Assn" {
+    subnet_id = aws_subnet.DevOps-Subnet1.id
+    route_table_id = aws_route_table.DevOps_RouteTable.id
+}
