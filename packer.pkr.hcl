@@ -26,6 +26,11 @@ source "amazon-ebs" "ubuntu" {
 build {
   sources = ["source.amazon-ebs.ubuntu"]
 
+  post-processor "manifest" {
+        output = "manifest.json"
+        strip_path = true
+    }
+
   provisioner "shell" {
     script = "./scripts/setup_packer.sh"
   }
