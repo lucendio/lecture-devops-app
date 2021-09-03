@@ -42,17 +42,19 @@ terraform init
 `always after using, otherwhise you have to pay`
 terraform destroy
 
-
-
-=============================
-
-
 =============================
 
 ### ssh to the EC2 instance
 
 chmod 600 mykey
-sudo ssh 52.59.229.1 -l ubuntu -i mykey
+sudo ssh <public_ip> -l ubuntu -i mykey
+
+=============================
+
+
+### see user-date launched on instance
+
+cd /var/lib/cloud/instances/<instance-id>/
 
 =============================
 

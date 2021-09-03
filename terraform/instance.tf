@@ -6,8 +6,8 @@ resource "aws_instance" "devops" {
   key_name      = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
   subnet_id = aws_subnet.DevOps-Subnet1.id
-  # associate_public_ip_address = true
-  # user_data = file("../scripts/installJenkins.sh")
+  associate_public_ip_address = true
+  user_data = file("../scripts/installJenkins.sh")
   
   tags = {
     Name = "devops"
