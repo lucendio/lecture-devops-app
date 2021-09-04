@@ -42,13 +42,14 @@ jobs:
           target: packer.pkr.hcl
 
       - name: Build artifact
-        run: |
-          packer build packer.pkr.hcl
-          echo "ami_id=$(manifest.json | jq -r '.builds[-1].artifact_id' |  cut -d':' -f2)" >> $GITHUB_ENV
-          echo ${{ env.ami_id }}
+        run: packer build packer.pkr.hcl
+
 
       - name: Setup AMI ID as terraform variable
-        run: export TF_VAR_ami_id=${{ env.ami_id }}
+        run: |
+          echo "ami_id=$(manifest.json | jq -r '.builds[-1].artifact_id' |  cut -d':' -f2)" >> $GITHUB_ENV
+          echo ${{ env.ami_id }}
+          export TF_VAR_ami_id=${{ env.ami_id }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
