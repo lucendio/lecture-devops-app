@@ -26,7 +26,7 @@ vagrant ssh
 1. bei VB shardfolder -> lecture-devops-app hinzugefügt (auf mount) (automatisch erstelltes löschen) (nicht permanent)
 2. VB starten
 3. mkdir shared_folder
-4. sudo mount -t vboxsf lecture-devops-app shared_folder
+4. sudo mount -t vboxsf devops shared_folder
 5. cd shared_folder
 
 Ordner kann hinzugefügt werden und ist dann sowohl in der VB, als auch im Host verfügbar.
@@ -42,6 +42,19 @@ terraform init
 `always after using, otherwhise you have to pay`
 terraform destroy
 
+=============================
 
+### ssh to the EC2 instance
+
+chmod 600 mykey
+sudo ssh <public_ip> -l ubuntu -i mykey
 
 =============================
+
+
+### see user-date launched on instance
+
+cd /var/lib/cloud/instances/<instance-id>/
+
+=============================
+

@@ -7,3 +7,6 @@
 */terraform.tfstate.backup
 */.terraform
 terraform/vars.tf
+EC2.pem
+terraform/mykey
+terraform/mykey.pub
