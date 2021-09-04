@@ -47,9 +47,26 @@ jobs:
           echo "ami_id=$(manifest.json | jq -r '.builds[-1].artifact_id' |  cut -d':' -f2)" >> $GITHUB_ENV
           echo ${{ env.ami_id }}
 
-      - name: Terraform set AMI ID
-        run: |
-          echo "test"
+      - name: Setup AMI ID as terraform variable
+        run: export TF_VAR_ami_id=${{ env.ami_id }}
 
-      # TODO: Use ami output for terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+
+     - name: Terraform Validate
+       id: validate
+       run: terraform validate -no-color
+
       # TODO: SSH into instance and build app with IP and run

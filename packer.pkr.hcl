@@ -7,10 +7,17 @@ packer {
   }
 }
 
+variable "region" {
+  type    = string
+  default = "us-east-1"
+}
+
+locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
+
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "packer_todoapp"
+  ami_name      = "packer_todoapp-${local.timestamp}"
   instance_type = "t2.micro"
-  region        = "us-east-1"
+  region        = var.region
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*"
