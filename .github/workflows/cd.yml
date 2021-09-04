@@ -60,8 +60,8 @@ jobs:
       - name: 'Terraform Init'
         run: terraform init
 
-     - name: Terraform Validate
-       id: validate
-       run: terraform validate -no-color
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
 
       # TODO: SSH into instance and build app with IP and run
