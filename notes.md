@@ -65,20 +65,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 =============================
 
-### ansibleUser generate new ssh key in Ansible-Controller
-
-`add ansibleadmin to sudo group`
-
-sudo usermod -aG sudo ansibleadmin
-
-sudo mdkir ansibleadmin
-
-sudo chown -R ansibleadmin:ansibleadmin /home/ansibleadmin/
-sudo chown root:root /home/ansibleadmin
-sudo chmod 700 /home/ansibleadmin/.ssh
-sudo chmod 775 /home/ansibleadmin/.ssh
-ssh-keygen
-
+### ansibleUser
 
 ## switched to Ansible-Managed-Node
 
@@ -86,8 +73,6 @@ ip addr
 copy ip-address (Ip adress of managed node) 172.20.10.74/24
 
 ## switched to Ansible-Controller
-
-
 
 ssh-copy-id -i ~/.ssh/id_rsa ansibleadmin@172.20.10.205
 

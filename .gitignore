@@ -10,3 +10,4 @@ terraform/vars.tf
 EC2.pem
 terraform/mykey
 terraform/mykey.pub
+.terraform.tfstate.lock.info
