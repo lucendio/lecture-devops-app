@@ -43,7 +43,7 @@ resource "aws_instance" "Jenkins" {
 # Create an AWS EC" Instance to host Ansible Controller (control node)
 resource "aws_instance" "AnsibleController" {
   ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE_FOR_NEXUS
+  instance_type = var.INSTANCE_TYPE
   key_name      = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
   subnet_id = aws_subnet.DevOps-Subnet1.id
@@ -89,7 +89,7 @@ resource "aws_instance" "AnsibleMN_DockerHost" {
 # Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
 resource "aws_instance" "Nexus" {
   ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
+  instance_type = var.INSTANCE_TYPE_FOR_NEXUS
   key_name      = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
   subnet_id = aws_subnet.DevOps-Subnet1.id
