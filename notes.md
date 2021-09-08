@@ -63,6 +63,9 @@ cd /var/lib/cloud/instances/<instance-id>/
 `jenkins pw`
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
+-> Konfiguration der Hilfsprogramme 
+-> add Maven -> apply -> save
+
 1. login
 2. -> new Item (Element anlegen)
 3. enter job name: devops pipeline job
@@ -71,6 +74,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 6. scroll to Pipeline -> pipeline script from SCM
 7. SCM -> Git -> https://github.com/s84117/lecture-devops-app.git
 8. -> apply -> save
+9. build now 
 
 
 

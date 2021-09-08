@@ -4,9 +4,6 @@
 pipeline{
     //Directives
     agent any
-    def mvn_version = 'maven'
-    withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-    }
     tools {
         maven 'maven'
     }

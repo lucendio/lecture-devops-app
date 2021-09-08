@@ -40,64 +40,64 @@ resource "aws_instance" "Jenkins" {
   }
 }
 
-# Create an AWS EC" Instance to host Ansible Controller (control node)
-resource "aws_instance" "AnsibleController" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.ansible_controller.rendered}"
+# # Create an AWS EC" Instance to host Ansible Controller (control node)
+# resource "aws_instance" "AnsibleController" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.ansible_controller.rendered}"
   
-  tags = {
-    Name = "Ansible-ConrolNode"
-  }
-}
+#   tags = {
+#     Name = "Ansible-ConrolNode"
+#   }
+# }
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node1) to host Apache Tomcat Server
-resource "aws_instance" "AnsibleMN_TomcatHost" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.AnsibleMN_TomcatHost.rendered}"
+# # Create/Launch an AWS EC2 Instance(Ansible Manged Node1) to host Apache Tomcat Server
+# resource "aws_instance" "AnsibleMN_TomcatHost" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.AnsibleMN_TomcatHost.rendered}"
   
-  tags = {
-    Name = "AnsibleMN-Tomcat"
-  }
-}
+#   tags = {
+#     Name = "AnsibleMN-Tomcat"
+#   }
+# }
 
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
-resource "aws_instance" "AnsibleMN_DockerHost" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.AnsibleMN_DockerHost.rendered}"
+# # Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
+# resource "aws_instance" "AnsibleMN_DockerHost" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.AnsibleMN_DockerHost.rendered}"
   
-  tags = {
-    Name = "AnsibleMN-Docker"
-  }
-}
+#   tags = {
+#     Name = "AnsibleMN-Docker"
+#   }
+# }
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
-resource "aws_instance" "Nexus" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE_FOR_NEXUS
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.Nexus.rendered}"
+# # Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
+# resource "aws_instance" "Nexus" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE_FOR_NEXUS
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.Nexus.rendered}"
   
-  tags = {
-    Name = "Nexus-Server"
-  }
-}
+#   tags = {
+#     Name = "Nexus-Server"
+#   }
+# }
 
