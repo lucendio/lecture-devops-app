@@ -76,6 +76,12 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 8. -> apply -> save
 9. build now 
 
+`Poll SCM`
+-> configure
+-> choose Poll SCM
+Schedule:
+***** (every minute)
+
 
 
 =============================
