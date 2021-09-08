@@ -80,13 +80,27 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 -> configure
 -> choose Poll SCM
 Schedule:
-***** (every minute)
+* * * * * (every minute)
 
-
+`nexus conf`
+1. Pipeline syntax
+2. select nexus artifact uploader
+3. Nexus3
+4. cope PRIVATE ip address + PORT
+5. enter user (nexus) + pw (nexus)
+6. go to nexus server -> repo -> name = repository in jenkins
+7. go to pom.xml groupid = groupid
+8. version = snapshot version
+9. click add artifacts
+10. artifactID = pom.xml artifactID
+11. type = war
+12. file = target/groupid-version.war
+13. click generate pipeline script 
+14. copy snippet
 
 =============================
 
-### ansibleUser
+### Ansible
 
 ## switched to Ansible-Managed-Node
 
@@ -98,3 +112,22 @@ copy ip-address (Ip adress of managed node) 172.20.10.74/24
 ssh-copy-id -i ~/.ssh/id_rsa ansibleadmin@172.20.10.205
 
 ssh-copy-id 172.20.10.93
+
+=============================
+
+### Nexus
+
+`nexus pw`
+sudo cat /opt/sonatype-work/nexus3/admin.password
+
+1. enter new pw
+2. choose Enable anonymous access
+3. click settings -> repos
+
+`How to create a repo (one to store snapchat artefacts, one to store release artefacts) `
+
+1. create repo
+2. npm (hosted)
+3. devops-client-SNAPCHAT
+
+
