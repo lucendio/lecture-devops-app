@@ -4,7 +4,7 @@
 
     <groupId>com.devopsproject</groupId>
     <artifactId>tanjapolz</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>war</packaging>
     <dependencies>
         <dependency>
@@ -14,5 +14,7 @@
             <scope>test</scope>
           </dependency>
     </dependencies>
-
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+      </build>
 </project>
