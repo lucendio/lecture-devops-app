@@ -4,9 +4,6 @@
 pipeline{
     //Directives
     agent any
-    tools {
-        // maven 'maven'
-    }
 
     stages {
         // Specify various stage with in stages
@@ -14,7 +11,7 @@ pipeline{
         // stage 1. Build
         stage ('Build'){
             steps {
-                sh 'mvn clean install package'
+                echo ' building......'
             }
         }
 
