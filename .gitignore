@@ -11,3 +11,8 @@ EC2.pem
 terraform/mykey
 terraform/mykey.pub
 .terraform.tfstate.lock.info
+terraform/.classpath
+terraform/.project
+terraform/.settings/org.eclipse.jdt.apt.core.prefs
+terraform/.settings/org.eclipse.jdt.core.prefs
+terraform/.settings/org.eclipse.m2e.core.prefs
