@@ -3,20 +3,26 @@ pipeline {
     
   tools {nodejs "node"}
     
-  stages {
-        
-    stage('Build') {
-      steps {
-        sh 'npm install'
-         sh '<<Build Command>>'
-      }
-    }  
-    
-            
-    stage('Test') {
-      steps {
-        sh 'node test'
-      }
+    // stage 1. Build
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+          // Stage2 : Testing
+        stage ('Test'){
+            steps {
+                echo ' testing......'
+
+            }
+        }
+
+       // Stage3 : Publish the artifacts to Nexus
+        stage ('Deploy'){
+            steps {
+                echo ' deploying......'
+            }
+        }
     }
-  }
 }
