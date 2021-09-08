@@ -60,7 +60,18 @@ cd /var/lib/cloud/instances/<instance-id>/
 
 ### Jenkins
 
+`jenkins pw`
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+1. login
+2. -> new Item (Element anlegen)
+3. enter job name: devops pipeline job
+4. click pipeline
+5. descroption: 3 stage contionous delivery pipeline
+6. scroll to Pipeline -> pipeline script from SCM
+7. SCM -> Git -> https://github.com/s84117/lecture-devops-app.git
+8. -> apply -> save
+
 
 
 =============================
@@ -76,4 +87,4 @@ copy ip-address (Ip adress of managed node) 172.20.10.74/24
 
 ssh-copy-id -i ~/.ssh/id_rsa ansibleadmin@172.20.10.205
 
-ssh-copy-id 172.20.10.205
+ssh-copy-id 172.20.10.93
