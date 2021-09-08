@@ -12,5 +12,7 @@ sleep 3m
 && sudo mkdir -p tools \
 && sudo wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.11.0/jenkins-plugin-manager-2.11.0.jar \
 && sudo java -jar jenkins-plugin-manager-2.11.0.jar --war /usr/lib/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --plugins maven-plugin \
+&& sudo java -jar jenkins-plugin-manager-2.11.0.jar --war /usr/lib/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --plugins publish-over-ssh \
 && sudo chown jenkins:jenkins /var/lib/jenkins/plugins/maven-plugin.jpi
+&& sudo chown jenkins:jenkins /var/lib/jenkins/plugins/publish-over-ssh.jpi
 sudo service jenkins restart
