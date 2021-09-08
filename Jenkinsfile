@@ -1,22 +1,41 @@
-pipeline {
+// declarative pipeline simplified syntax for defining the pipeline
+// contains all definitions of jenkins pipeline
+
+pipeline{
+    //Directives
     agent any
-    tools { // <1>
-        maven 'Maven 3.3.9'// <2>
-        jdk 'jdk8'// <3>
+    def mvn_version = 'maven'
+    withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
     }
+    tools {
+        maven 'maven'
+    }
+
     stages {
-        stage ('Initialize') {
+        // Specify various stage with in stages
+
+        // stage 1. Build
+        stage ('Build'){
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"'''// <4>
+                sh 'mvn clean install package'
             }
         }
 
-        stage ('Build') {
+        // Stage2 : Testing
+        stage ('Test'){
             steps {
-                echo 'This is a minimal pipeline.'
+                echo ' testing......'
+
             }
         }
+
+        // Stage3 : Publish the artifacts to Nexus
+        stage ('Deploy'){
+            steps {
+                echo ' deploying......'
+            }
+        }
+
     }
+
 }
