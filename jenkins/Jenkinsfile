@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('/var/lib/jenkins/workspace/app/client/') {
+                dir('/var/lib/jenkins/workspace/1/app/client/') {
                     sh "npm install"
                 }
             }
