@@ -1,19 +1,10 @@
-// declarative pipeline simplified syntax for defining the pipeline
-// contains all definitions of jenkins pipeline
-
 pipeline{
     //Directives
-    // execute particular pipeline
     agent any
     tools {
         maven 'maven'
     }
-    environment{
-       ArtifactId = readMavenPom().getArtifactId()
-       Version = readMavenPom().getVersion()
-       Name = readMavenPom().getName()
-       GroupId = readMavenPom().getGroupId()
-    }
+
     stages {
         // Specify various stage with in stages
 
@@ -32,11 +23,19 @@ pipeline{
             }
         }
 
+        // Stage3 : Publish the source code to Sonarqube
+        stage ('Sonarqube Analysis'){
+            steps {
+                echo ' Source code published to Sonarqube for SCA......'
+                withSonarQubeEnv('sonarqube'){ // You can override the credential to be used
+                     sh 'mvn sonar:sonar'
+                }
 
+            }
+        }
 
-
-
-
+        
+        
     }
 
 }
