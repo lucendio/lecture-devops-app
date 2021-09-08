@@ -1,0 +1,12 @@
+.header-main{
+    min-height: 20vh;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--themeOutlineColor);
+    color: var(--themeHeaderColor);
+    font-size: 60px;
+    font-weight: 100;
+}
