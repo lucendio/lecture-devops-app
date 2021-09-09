@@ -1,7 +1,7 @@
 {
   "name": "todo-app-client",
   "version": "2.0.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "axios": ">=0.21.1",
     "mdbreact": "^4.25.5",
