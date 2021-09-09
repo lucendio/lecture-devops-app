@@ -9,6 +9,9 @@
     "test": "jest --ci",
     "test:dev": "env-cmd -f ./dev.env jest"
   },
+  "publishConfig": {
+    "registry": "http://18.185.136.129:8081/repository/npm-private/"
+  },
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "jest": "^26.6.3",

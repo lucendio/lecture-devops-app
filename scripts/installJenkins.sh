@@ -12,11 +12,9 @@ sleep 3m
 && sudo mkdir -p tools \
 && sudo wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.11.0/jenkins-plugin-manager-2.11.0.jar \
 && sudo java -jar jenkins-plugin-manager-2.11.0.jar --war /usr/lib/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --plugins nodejs \
-&& sudo java -jar jenkins-plugin-manager-2.11.0.jar --war /usr/lib/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --plugins nexus-artifact-uploader \
 && sudo java -jar jenkins-plugin-manager-2.11.0.jar --war /usr/lib/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --plugins mongodb \
 && sudo java -jar jenkins-plugin-manager-2.11.0.jar --war /usr/lib/jenkins/jenkins.war --plugin-download-directory /var/lib/jenkins/plugins --plugins publish-over-ssh \
 && sudo chown jenkins:jenkins /var/lib/jenkins/plugins/nodejs.jpi
-&& sudo chown jenkins:jenkins /var/lib/jenkins/plugins/nexus-artifact-uploader.jpi
 && sudo chown jenkins:jenkins /var/lib/jenkins/plugins/publish-over-ssh.jpi
 && sudo chown jenkins:jenkins /var/lib/jenkins/plugins/mongodb.jpi
 sudo service jenkins restart
