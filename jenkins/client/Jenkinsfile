@@ -21,17 +21,15 @@ pipeline {
             }
         }
 
-        /// stage 1. Build
-        stages {
-            stage('Build') {
-                steps {
-                    dir('/var/lib/jenkins/workspace/client/app/client/') {
-                        sh "npm publish"
-                    }
+        // Stage3: Publishing artifacts to nexus
+        stage ('Publishing'){
+               steps {
+                dir('/var/lib/jenkins/workspace/client/app/client/') {
+                    sh "npm install"
                 }
             }
-
-  
+        }
+        
 
        // Stage4: Publish the artifacts to Nexus
         stage ('Deploy'){
