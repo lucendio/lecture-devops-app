@@ -27,7 +27,7 @@ pipeline {
                 dir('/var/lib/jenkins/workspace/client/app/client/') {
                     sh 'npm whoami'
                     sh 'rm .npmrc'
-                    sh "npm publish"
+                    sh "yarn publish"
                 }
             }
         }
