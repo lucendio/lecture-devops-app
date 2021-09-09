@@ -25,7 +25,7 @@ pipeline {
         stage ('Publishing'){
                steps {
                 dir('/var/lib/jenkins/workspace/client/app/client/') {
-                    sh "npm install"
+                    sh "npm publish"
                 }
             }
         }
