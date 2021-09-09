@@ -1,6 +1,6 @@
 {
   "name": "todo-app-client",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": false,
   "dependencies": {
     "axios": ">=0.21.1",
