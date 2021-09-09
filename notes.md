@@ -94,7 +94,7 @@ Schedule:
 9. click add artifacts
 10. artifactID = pom.xml artifactID
 11. type = war
-12. file = target/artififactid.war
+12. file = target/artififactid-version.war
 13. click generate pipeline script 
 14. copy snippet
 

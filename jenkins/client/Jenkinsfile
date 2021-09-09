@@ -21,12 +21,12 @@ pipeline {
             }
         }
 
-        // Stage3: Publishing artifacts to nexus
-        stage ('Publishing'){
-            steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'tanjapolz', classifier: '', file: 'target/tanjapolz-0.0.5-SNAPSHOT.war', type: 'war']], credentialsId: '38cc8635-b552-4aad-b98f-0e36d6a1eab5', groupId: 'com.devopsproject', nexusUrl: '172.20.10.170', nexusVersion: 'nexus3', protocol: 'http', repository: 'devops-client-SNAPSHOT', version: '0.0.5-SNAPSHOT'            
-                }
-            }
+        // // Stage3: Publishing artifacts to nexus
+        // stage ('Publishing'){
+        //     steps {
+        //         nexusArtifactUploader artifacts: [[artifactId: 'tanjapolz', classifier: '', file: 'target/tanjapolz-0.0.5-SNAPSHOT.war', type: 'war']], credentialsId: '38cc8635-b552-4aad-b98f-0e36d6a1eab5', groupId: 'com.devopsproject', nexusUrl: '172.20.10.170', nexusVersion: 'nexus3', protocol: 'http', repository: 'devops-client-SNAPSHOT', version: '0.0.5-SNAPSHOT'            
+        //         }
+        //     }
         
 
        // Stage4: Publish the artifacts to Nexus
