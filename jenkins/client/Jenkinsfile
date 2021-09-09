@@ -28,7 +28,7 @@ pipeline {
                     sh "npm publish"
                     sh 'npm whoami'
                     sh 'rm .npmrc'
-                    sh './jenkins/client/scripts/publish.sh'
+                    // sh './jenkins/client/scripts/publish.sh'
 
                 }
             }
