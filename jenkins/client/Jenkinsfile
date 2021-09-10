@@ -30,6 +30,7 @@ pipeline {
                         sh 'npm whoami'
                         sh 'rm .npmrc'
                         sh 'npm set --registry http://18.185.136.129:8081/repository/npm-private/ _auth=YWRtaW46YWRtaW4xMjM='
+                        sh "npm publish"
 
                 }
             }
