@@ -28,8 +28,6 @@ pipeline {
                steps {
                     dir('/var/lib/jenkins/workspace/client/app/client/') {
                         sh 'npm publish'
-                    }
-                    dir('/var/lib/jenkins/workspace/client/jenkins/client/') {
                         sh 'npm whoami'
                         sh 'rm .npmrc'
                     }
