@@ -27,10 +27,9 @@ pipeline {
         stage ('Publishing'){
                steps {
                     dir('/var/lib/jenkins/workspace/client/app/client/') {
-                        sh 'npm publish --registry http://18.185.136.129:8081 _auth=YWRtaW46YWRtaW4xMjM='
-                        sh 'npm adduser --registry http://18.185.136.129:8081 --always-auth'
-                        sh 'npm whoami'
-                        sh 'rm .npmrc'
+                        echo "http://18.185.136.129:8081/repository/npm-private/:_authToken=$AUTH_TOKEN" > ~/.npmrc
+                        sh "npm publish"
+
                 }
             }
         }
