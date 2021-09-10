@@ -26,11 +26,11 @@ pipeline {
         // Stage3: Publishing artifacts to nexus
         stage ('Publishing'){
                steps {
-          
+                    dir('/var/lib/jenkins/workspace/client/app/client/') {
                         sh 'npm publish'
                         sh 'npm whoami'
                         sh 'rm .npmrc'
-                
+                }
             }
         }
         
