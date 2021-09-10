@@ -27,10 +27,10 @@ pipeline {
         stage ('Publishing'){
                steps {
                 dir('/var/lib/jenkins/workspace/client/app/client/') {
-                    sh "npm publish"
-                    sh './jenkins/clients/addUser.sh'
                     sh 'npm whoami'
                     sh 'rm .npmrc'
+                    sh "npm publish"
+                    sh './jenkins/clients/addUser.sh'
                 }
             }
         }
