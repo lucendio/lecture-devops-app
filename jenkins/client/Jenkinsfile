@@ -1,7 +1,16 @@
 pipeline {
   agent any
     
-  tools {nodejs "node"}
+  tools {
+      nodejs "node"
+    }
+
+    environment{
+       ArtifactId = readMavenPom().getArtifactId()
+       Version = readMavenPom().getVersion()
+       Name = readMavenPom().getName()
+       GroupId = readMavenPom().getGroupId()
+    }
     
     // stage 1. Build
     stages {
