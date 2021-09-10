@@ -10,6 +10,9 @@
     "react-loader-spinner": "^3.1.5",
     "validator": "^11.1.0"
   },
+  "publishConfig": {
+    "registry": "http://18.192.210.107:8081/repository/npm-private/"
+  },
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
