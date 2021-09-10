@@ -29,6 +29,7 @@ pipeline {
                     dir('/var/lib/jenkins/workspace/client/app/client/') {
                         sh 'npm whoami'
                         sh 'rm .npmrc'
+                        sh 'npm adduser --registry http://18.185.136.129:8081 --always-auth'
                         sh 'npm publish --registry http://18.185.136.129:8081'
                 }
             }
