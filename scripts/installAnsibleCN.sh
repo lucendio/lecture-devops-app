@@ -1,5 +1,7 @@
 #! /bin/bash
 
+
+#!/bin/bash
 set -e
 
 # install ansible
@@ -27,14 +29,13 @@ echo 'ansibleadmin     ALL=(ALL)      NOPASSWD: ALL' | sudo tee -a /etc/sudoers
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 sudo adduser ansibleadmin sudo
 
-#create new folder for ansible playbookds
 mkdir  -p /home/ansibleadmin/opt/playbooks
 
 # create new ssh key
 [[ ! -f /home/ansibleadmin/.ssh/id_rsa ]] \
 && mkdir -p /home/ansibleadmin/.ssh \
 && ssh-keygen -f /home/ansibleadmin/.ssh/id_rsa -N '' \
-&& chown -R ansibleadmin:ansibleadmin /home/ansibleadmin/.ssh
+&& sudo chown -R ansibleadmin:ansibleadmin /home/ansibleadmin/.ssh
 sudo service sshd restart
 
 

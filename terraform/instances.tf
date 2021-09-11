@@ -40,6 +40,20 @@ data "template_file" "Nexus" {
 #   }
 # }
 
+# Create an AWS EC" Instance to host Ansible Controller (control node)
+resource "aws_instance" "AnsibleController" {
+  ami           = var.AMIS[var.AWS_REGION]
+  instance_type = var.INSTANCE_TYPE
+  key_name      = aws_key_pair.mykey.key_name
+  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+  subnet_id = aws_subnet.DevOps-Subnet1.id
+  associate_public_ip_address = true
+  user_data = "${data.template_file.ansible_controller.rendered}"
+  
+  tags = {
+    Name = "Ansible-ConrolNode"
+  }
+}
 
 # Create/Launch an AWS EC2 Instance(Ansible Manged Node1) to host Apache Tomcat Server
 resource "aws_instance" "AnsibleMN_TomcatHost" {
@@ -56,7 +70,8 @@ resource "aws_instance" "AnsibleMN_TomcatHost" {
   }
 }
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Docker Server
+
+# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
 resource "aws_instance" "AnsibleMN_DockerHost" {
   ami           = var.AMIS[var.AWS_REGION]
   instance_type = var.INSTANCE_TYPE
@@ -71,23 +86,7 @@ resource "aws_instance" "AnsibleMN_DockerHost" {
   }
 }
 
-# Create an AWS EC" Instance to host Ansible Controller (control node)
-resource "aws_instance" "AnsibleController" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.ansible_controller.rendered}"
-  
-  tags = {
-    Name = "Ansible-ConrolNode"
-  }
-}
-
-
-# # Create/Launch an AWS EC2 Instanc to host Nexus Server
+# # Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
 # resource "aws_instance" "Nexus" {
 #   ami           = var.AMIS[var.AWS_REGION]
 #   instance_type = var.INSTANCE_TYPE_FOR_NEXUS
@@ -107,9 +106,10 @@ output "AnsibleController_ip" {
 }
 
 output "AnsibleMN_TomcatHost_ip" {
-  value = aws_instance.AnsibleMN_TomcatHost.public_ip
+  value = aws_instance.AnsibleMN_TomcatHost.private_ip
 }
 
 output "AnsibleMN_DockerHost_ip" {
-  value = aws_instance.AnsibleMN_DockerHost.public_ip
+  value = aws_instance.AnsibleMN_DockerHost.private_ip
 }
+

@@ -102,16 +102,16 @@ Schedule:
 
 ### Ansible
 
-## switched to Ansible-Managed-Node
+## Ansible-Controller
 
-ip addr
-copy ip-address (Ip adress of managed node) 172.20.10.74/24
+ssh-copy-id DockerHost
+ssh-copy-id TomcatHost
 
-## switched to Ansible-Controller
-
-ssh-copy-id -i ~/.ssh/id_rsa ansibleadmin@172.20.10.205
-
-ssh-copy-id 172.20.10.93
+1. cd .. playbooks
+2. sudo vim host
+-m = module
+groupname = tomcat/docker
+3. ansible groupname -m
 
 =============================
 
@@ -131,3 +131,10 @@ sudo cat /opt/sonatype-work/nexus3/admin.password
 3. devops-client-SNAPCHAT
 
 
+=============================
+
+### troubleshooting
+
+`time issue`
+
+sudo ntpdate ntp.ubuntu.com
