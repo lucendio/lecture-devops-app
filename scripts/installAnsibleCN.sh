@@ -29,7 +29,7 @@ echo 'ansibleadmin     ALL=(ALL)      NOPASSWD: ALL' | sudo tee -a /etc/sudoers
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 sudo adduser ansibleadmin sudo
 
-mkdir  -p /home/ansibleadmin/opt/playbooks
+mkdir /opt/playbooks/
 
 # create new ssh key
 [[ ! -f /home/ansibleadmin/.ssh/id_rsa ]] \

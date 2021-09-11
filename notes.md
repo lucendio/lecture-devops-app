@@ -104,14 +104,19 @@ Schedule:
 
 ## Ansible-Controller
 
-ssh-copy-id DockerHost
-ssh-copy-id TomcatHost
+1. ubuntu pw in den nodes ändern
+2. ssh key generieren
+3. vim /etc/ansible/hosts
+-> 
+[tomcat]
+172.20.10.103
 
-1. cd .. playbooks
-2. sudo vim host
--m = module
-groupname = tomcat/docker
-3. ansible groupname -m
+[docker]
+172.20.10.142
+
+4. ssh-copy-id DockerHost, ssh-copy-id TomcatHost
+5. cd /etc/ansible
+6. ansible groupname -m ping -i hosts -> ansible tomcat -m ping -i hosts
 
 =============================
 
@@ -138,3 +143,7 @@ sudo cat /opt/sonatype-work/nexus3/admin.password
 `time issue`
 
 sudo ntpdate ntp.ubuntu.com
+
+sudp passwd
+sudo passwd ubuntu
+passwd
