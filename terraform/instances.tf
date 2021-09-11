@@ -24,19 +24,50 @@ data "template_file" "Nexus" {
 }
 
 
-# Create an AWS EC2 Instance (allows instances to be created, updated and deleted. Instancec also support provisioning)
-# AMI = Amazon machine imgag -> template that contains software configs (operating system, application etc.)
-resource "aws_instance" "Jenkins" {
+# # Create an AWS EC2 Instance (allows instances to be created, updated and deleted. Instancec also support provisioning)
+# # AMI = Amazon machine imgag -> template that contains software configs (operating system, application etc.)
+# resource "aws_instance" "Jenkins" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.jenkins_server.rendered}"
+  
+#   tags = {
+#     Name = "Jenkins-Server"
+#   }
+# }
+
+
+# Create/Launch an AWS EC2 Instance(Ansible Manged Node1) to host Apache Tomcat Server
+resource "aws_instance" "AnsibleMN_TomcatHost" {
   ami           = var.AMIS[var.AWS_REGION]
   instance_type = var.INSTANCE_TYPE
   key_name      = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
   subnet_id = aws_subnet.DevOps-Subnet1.id
   associate_public_ip_address = true
-  user_data = "${data.template_file.jenkins_server.rendered}"
+  user_data = "${data.template_file.AnsibleMN_TomcatHost.rendered}"
   
   tags = {
-    Name = "Jenkins-Server"
+    Name = "AnsibleMN-Tomcat"
+  }
+}
+
+# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Docker Server
+resource "aws_instance" "AnsibleMN_DockerHost" {
+  ami           = var.AMIS[var.AWS_REGION]
+  instance_type = var.INSTANCE_TYPE
+  key_name      = aws_key_pair.mykey.key_name
+  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+  subnet_id = aws_subnet.DevOps-Subnet1.id
+  associate_public_ip_address = true
+  user_data = "${data.template_file.AnsibleMN_DockerHost.rendered}"
+  
+  tags = {
+    Name = "AnsibleMN-Docker"
   }
 }
 
@@ -55,49 +86,30 @@ resource "aws_instance" "AnsibleController" {
   }
 }
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node1) to host Apache Tomcat Server
-resource "aws_instance" "AnsibleMN_TomcatHost" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.AnsibleMN_TomcatHost.rendered}"
+
+# # Create/Launch an AWS EC2 Instanc to host Nexus Server
+# resource "aws_instance" "Nexus" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE_FOR_NEXUS
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.Nexus.rendered}"
   
-  tags = {
-    Name = "AnsibleMN-Tomcat"
-  }
+#   tags = {
+#     Name = "Nexus-Server"
+#   }
+# }
+
+output "AnsibleController_ip" {
+  value = aws_instance.AnsibleController.public_ip
 }
 
-
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
-resource "aws_instance" "AnsibleMN_DockerHost" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.AnsibleMN_DockerHost.rendered}"
-  
-  tags = {
-    Name = "AnsibleMN-Docker"
-  }
+output "AnsibleMN_TomcatHost_ip" {
+  value = aws_instance.AnsibleMN_TomcatHost.public_ip
 }
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
-resource "aws_instance" "Nexus" {
-  ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE_FOR_NEXUS
-  key_name      = aws_key_pair.mykey.key_name
-  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
-  subnet_id = aws_subnet.DevOps-Subnet1.id
-  associate_public_ip_address = true
-  user_data = "${data.template_file.Nexus.rendered}"
-  
-  tags = {
-    Name = "Nexus-Server"
-  }
+output "AnsibleMN_DockerHost_ip" {
+  value = aws_instance.AnsibleMN_DockerHost.public_ip
 }
-

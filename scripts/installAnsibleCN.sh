@@ -1,7 +1,5 @@
 #! /bin/bash
 
-
-#!/bin/bash
 set -e
 
 # install ansible
@@ -28,6 +26,10 @@ echo 'ansibleadmin     ALL=(ALL)      NOPASSWD: ALL' | sudo tee -a /etc/sudoers
 # the below sed command will find and replace words with spaces "PasswordAuthentication no" to "PasswordAuthentication yes"
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 sudo adduser ansibleadmin sudo
+
+#create new folder for ansible playbookds
+mkdir  -p /home/ansibleadmin/opt/playbooks
+
 # create new ssh key
 [[ ! -f /home/ansibleadmin/.ssh/id_rsa ]] \
 && mkdir -p /home/ansibleadmin/.ssh \
