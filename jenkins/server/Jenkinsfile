@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('/var/lib/jenkins/workspace/client/app/client/') {
+                dir('/var/lib/jenkins/workspace/server/app/server/') {
                     sh "npm install"
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
           // Stage2 : Testing
         stage ('Test'){
               steps {
-                dir('/var/lib/jenkins/workspace/client/app/client/') {
+                dir('/var/lib/jenkins/workspace/server/app/server/') {
                     sh "npm test"
                  
 
@@ -29,7 +29,7 @@ pipeline {
               //   // Stage2 : Testing
         // stage ('ExecuteSonarQubeReport'){
         //       steps {
-        //         dir('/var/lib/jenkins/workspace/client/app/client/') {
+        //         dir('/var/lib/jenkins/workspace/server/app/server/') {
         //             sh "node sonar-project"
                  
 
@@ -40,7 +40,7 @@ pipeline {
         // Stage3: Publishing artifacts to nexus
         // stage ('Publishing'){
         //        steps {
-        //             dir('/var/lib/jenkins/workspace/client/app/client/') {
+        //             dir('/var/lib/jenkins/workspace/server/app/server/') {
         //                 sh 'npm publish'
         //                 sh 'npm whoami'
         //                 sh 'rm .npmrc'
