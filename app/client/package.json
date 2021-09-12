@@ -72,8 +72,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "test": "jest --ci",
-    "test:dev": "jest",
-    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
+    "test:dev": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"
