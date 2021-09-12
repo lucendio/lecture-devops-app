@@ -164,7 +164,49 @@ passwd
 
 ### Sonar
 
+openjdk-8-jre-headless
+
 sudo bash
 
+ALTER USER sonar WITH ENCRYPTED password 'sonar';
+CREATE DATABASE sonar OWNER sonar;
+
+sudo vim /opt/sonarqube/bin/linux-x86-64/sonar.sh
 
 sudo vim /opt/sonarqube/conf/sonar.properties
+
+
+
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonar
+sonar.jdbc.url=jdbc:postgresql://localhost/sonar
+sonar.web.host=0.0.0.0
+sonar.web.port=9000
+sonar.web.javaAdditionalOpts=-server
+sonar.search.javaOpts=-Xmx512m -Xms512m -XX:+HeapDumpOnOutOfMemoryError
+sonar.log.level=INFO
+sonar.path.logs=logs
+
+sudo vim /etc/systemd/system/sonar.service
+
+sudo vim /etc/apache2/sites-available/sonar.conf
+
+
+sudo vim /etc/sysctl.conf
+
+sudo vim /etc/security/limits.conf
+
+
+sonar   -   nofile   65536
+sonar   -   nproc    4096
+
+ALTER USER sonar WITH ENCRYPTED password 'sonar';
+CREATE DATABASE sonar OWNER sonar;
+GRANT ALL PRIVILEGES ON DATABASE sonar to sonar;
+
+
+sonar-scanner \
+  -Dsonar.projectKey=admin \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://18.193.46.100:9000 \
+  -Dsonar.login=e8baee64f88ae2a26cf1d08685b21da5383baed9
