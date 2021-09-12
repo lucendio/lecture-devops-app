@@ -15,7 +15,18 @@ pipeline {
             }
         }
 
-        //   // Stage2 : Testing
+          // Stage2 : Testing
+        stage ('ExecuteSonarQubeReport'){
+              steps {
+                dir('/var/lib/jenkins/workspace/client/app/client/') {
+                    sh "npm test"
+                 
+
+                }
+            }
+        }
+
+              //   // Stage2 : Testing
         // stage ('ExecuteSonarQubeReport'){
         //       steps {
         //         dir('/var/lib/jenkins/workspace/client/app/client/') {
