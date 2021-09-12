@@ -23,9 +23,19 @@ data "template_file" "Nexus" {
   template = "${file("../scripts/installNexus.sh")}"
 }
 
-# userdata for the AnsibleMN_DockerHost
+# userdata for the Sonar
 data "template_file" "Sonar" {
   template = "${file("../scripts/installSonar.sh")}"
+}
+
+# userdata for the AnsibleMN_DockerHost
+data "template_file" "MongoDB_server" {
+  template = "${file("../scripts/installMongoDB.sh")}"
+}
+
+# userdata for the Sonar
+data "template_file" "Node_server" {
+  template = "${file("../scripts/installNode.sh")}"
 }
 
 
@@ -106,18 +116,45 @@ resource "aws_instance" "Nexus" {
   }
 }
 
-# # Create/Launch an AWS EC2 Instance to host SonarQube Host
-resource "aws_instance" "Sonar" {
+# # # Create/Launch an AWS EC2 Instance to host SonarQube Host
+# resource "aws_instance" "Sonar" {
+#   ami           = var.AMIS[var.AWS_REGION]
+#   instance_type = var.INSTANCE_TYPE_FOR_NEXUS
+#   key_name      = aws_key_pair.mykey.key_name
+#   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+#   subnet_id = aws_subnet.DevOps-Subnet1.id
+#   associate_public_ip_address = true
+#   user_data = "${data.template_file.Sonar.rendered}"
+  
+#   tags = {
+#     Name = "Sonar-Server"
+#   }
+# }
+
+resource "aws_instance" "Node" {
   ami           = var.AMIS[var.AWS_REGION]
-  instance_type = var.INSTANCE_TYPE_FOR_NEXUS
+  instance_type = var.INSTANCE_TYPE
   key_name      = aws_key_pair.mykey.key_name
   vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
   subnet_id = aws_subnet.DevOps-Subnet1.id
   associate_public_ip_address = true
-  user_data = "${data.template_file.Sonar.rendered}"
+  user_data = "${data.template_file.Node_server.rendered}"
   
   tags = {
-    Name = "Sonar-Server"
+    Name = "Node-Server"
   }
 }
 
+resource "aws_instance" "MongoDB" {
+  ami           = var.AMIS[var.AWS_REGION]
+  instance_type = var.INSTANCE_TYPE
+  key_name      = aws_key_pair.mykey.key_name
+  vpc_security_group_ids = [aws_security_group.DevOps_Sec_Group.id]
+  subnet_id = aws_subnet.DevOps-Subnet1.id
+  associate_public_ip_address = true
+  user_data = "${data.template_file.MongoDB_server.rendered}"
+  
+  tags = {
+    Name = "MongoDB-Server"
+  }
+}
