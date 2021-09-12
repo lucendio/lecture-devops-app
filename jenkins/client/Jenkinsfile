@@ -19,7 +19,7 @@ pipeline {
         stage ('ExecuteSonarQubeReport'){
               steps {
                 dir('/var/lib/jenkins/workspace/client/app/client/') {
-                    sh "npm run sonar-project.js"
+                    sh "npm run sonar-project1.js"
                 }
             }
         }
