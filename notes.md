@@ -112,10 +112,10 @@ Schedule:
 3. sudo vim /etc/ansible/hosts
 -> 
 [tomcat]
-172.20.10.38
+ 172.20.10.61
 
 [docker]
-172.20.10.133
+172.20.10.131
 
 4. ssh-copy-id DockerHost, ssh-copy-id TomcatHost
 `testing`
@@ -158,3 +158,13 @@ sudo ntpdate ntp.ubuntu.com
 sudp passwd
 sudo passwd ubuntu
 passwd
+
+
+=============================
+
+### Sonar
+
+sudo bash
+
+
+sudo vim /opt/sonarqube/conf/sonar.properties
