@@ -1,5 +1,0 @@
-[tomcat]
-172.20.10.7 ansible_user=ansibleadmin
-
-[docker]
-172.20.10.171 ansible_user=ansibleadmin

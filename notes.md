@@ -102,21 +102,32 @@ Schedule:
 
 ### Ansible
 
-## Ansible-Controller
+## Ansible-Nodes
 
 1. ubuntu pw in den nodes ändern
+
+## Ansible-Controller
+
 2. ssh key generieren
-3. vim /etc/ansible/hosts
+3. sudo vim /etc/ansible/hosts
 -> 
 [tomcat]
-172.20.10.103
+172.20.10.38
 
 [docker]
-172.20.10.142
+172.20.10.133
 
 4. ssh-copy-id DockerHost, ssh-copy-id TomcatHost
-5. cd /etc/ansible
-6. ansible groupname -m ping -i hosts -> ansible tomcat -m ping -i hosts
+`testing`
+(5. cd /etc/ansible)
+(6. ansible groupname -m ping -i hosts -> ansible tomcat -m ping -i hosts)
+7. run ansible-galaxy install zaxos.tomcat-ansible-role
+8.
+
+`run playbook`
+
+ ansible-playbook installTomcat.yaml -i hosts --check
+
 
 =============================
 
