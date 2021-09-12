@@ -17,10 +17,11 @@ pipeline {
 
           // Stage2 : Testing
         stage ('ExecuteSonarQubeReport'){
-            script {
-                  dir('/var/lib/jenkins/workspace/client/app/client/') {
-                sh "node sonar-project.js"
+              script {
+                dir('/var/lib/jenkins/workspace/client/app/client/') {
+                    sh "node project-sonar.js"
                 }
+            }
         }
 
         // Stage3: Publishing artifacts to nexus
