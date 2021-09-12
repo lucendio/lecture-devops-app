@@ -24,7 +24,7 @@ data "template_file" "Nexus" {
 }
 
 
-# Create an AWS EC2 Instance (allows instances to be created, updated and deleted. Instancec also support provisioning)
+# # Create an AWS EC2 Instance (allows instances to be created, updated and deleted. Instancec also support provisioning)
 # AMI = Amazon machine imgag -> template that contains software configs (operating system, application etc.)
 resource "aws_instance" "Jenkins" {
   ami           = var.AMIS[var.AWS_REGION]
@@ -86,7 +86,7 @@ resource "aws_instance" "AnsibleMN_DockerHost" {
   }
 }
 
-# Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
+# # Create/Launch an AWS EC2 Instance(Ansible Manged Node2) to host Apache Tomcat Server
 resource "aws_instance" "Nexus" {
   ami           = var.AMIS[var.AWS_REGION]
   instance_type = var.INSTANCE_TYPE_FOR_NEXUS
@@ -99,5 +99,17 @@ resource "aws_instance" "Nexus" {
   tags = {
     Name = "Nexus-Server"
   }
+}
+
+output "AnsibleController_ip" {
+  value = aws_instance.AnsibleController.public_ip
+}
+
+output "AnsibleMN_TomcatHost_ip" {
+  value = aws_instance.AnsibleMN_TomcatHost.private_ip
+}
+
+output "AnsibleMN_DockerHost_ip" {
+  value = aws_instance.AnsibleMN_DockerHost.private_ip
 }
 

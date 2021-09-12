@@ -102,16 +102,32 @@ Schedule:
 
 ### Ansible
 
-## switched to Ansible-Managed-Node
+## Ansible-Nodes
 
-ip addr
-copy ip-address (Ip adress of managed node) 172.20.10.74/24
+1. ubuntu pw in den nodes ändern
 
-## switched to Ansible-Controller
+## Ansible-Controller
 
-ssh-copy-id -i ~/.ssh/id_rsa ansibleadmin@172.20.10.205
+2. ssh key generieren
+3. sudo vim /etc/ansible/hosts
+-> 
+[tomcat]
+172.20.10.38
 
-ssh-copy-id 172.20.10.93
+[docker]
+172.20.10.133
+
+4. ssh-copy-id DockerHost, ssh-copy-id TomcatHost
+`testing`
+(5. cd /etc/ansible)
+(6. ansible groupname -m ping -i hosts -> ansible tomcat -m ping -i hosts)
+7. run ansible-galaxy install zaxos.tomcat-ansible-role
+8.
+
+`run playbook`
+
+ ansible-playbook installTomcat.yaml -i hosts --check
+
 
 =============================
 
@@ -131,3 +147,14 @@ sudo cat /opt/sonatype-work/nexus3/admin.password
 3. devops-client-SNAPCHAT
 
 
+=============================
+
+### troubleshooting
+
+`time issue`
+
+sudo ntpdate ntp.ubuntu.com
+
+sudp passwd
+sudo passwd ubuntu
+passwd
