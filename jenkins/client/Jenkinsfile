@@ -10,7 +10,6 @@ pipeline {
         stage('Build') {
             steps {
                 dir('/var/lib/jenkins/workspace/client/app/client/') {
-                    sh "npm i sonar-scanner --save-dev"
                     sh "npm install"
                 }
             }
