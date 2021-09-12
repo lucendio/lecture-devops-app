@@ -19,7 +19,6 @@ pipeline {
         stage ('ExecuteSonarQubeReport'){
               steps {
                 dir('/var/lib/jenkins/workspace/client/app/client/') {
-                    sh "npm install -D sonarqube-scanner"
                     sh "node sonar-project"
                  
 
