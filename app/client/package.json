@@ -10,8 +10,6 @@
     "react-loader-spinner": "^3.1.5",
     "validator": "^11.1.0"
   },
-  
-  
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
@@ -60,7 +58,6 @@
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
-    "sonarqube-scanner": "^2.7.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "2.3.5",
     "ts-pnp": "1.1.6",
