@@ -3,9 +3,6 @@ const sonarqubeScanner = require('sonarqube-scanner');
 sonarqubeScanner({
   serverUrl: 'http:/http://18.193.46.100:9000/',
        options : {
-	    'sonar.projectDescription': 'devops node js',
-	    'sonar.projectName': 'nodejs',
-	    'sonar.projectKey':'nodejs',
 	    'sonar.login': 'admin',
 	    'sonar.password': 'admin',
             'sonar.projectVersion':'1.0',
