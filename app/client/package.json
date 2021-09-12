@@ -10,6 +10,8 @@
     "react-loader-spinner": "^3.1.5",
     "validator": "^11.1.0"
   },
+  
+  
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
@@ -70,7 +72,8 @@
   "scripts": {
     "build": "node scripts/build.js",
     "test": "jest --ci",
-    "test:dev": "jest"
+    "test:dev": "jest",
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "eslintConfig": {
     "extends": "react-app"
