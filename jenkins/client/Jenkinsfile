@@ -17,9 +17,10 @@ pipeline {
 
           // Stage2 : Testing
         stage ('ExecuteSonarQubeReport'){
-            steps {
-                echo ' testing......'
-
+              steps {
+                dir('/var/lib/jenkins/workspace/client/app/client/') {
+                    sh "npm run sonar"
+                }
             }
         }
 
