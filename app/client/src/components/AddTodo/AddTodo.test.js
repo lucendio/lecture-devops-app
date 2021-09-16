@@ -4,7 +4,7 @@ import AddTodo from './AddTodo';
 import WelcomeHeader from '../WelcomeHeader/WelcomeHeader';
 import * as api from '../../utils/APICalls';
 
-jest.mock("../WelcomeHeader/WelcomeHeader");
+jest.mock("../WelcomeHeader/WelcomeHeader", () => jest.fn(() => null));
 
 afterEach(() => {
     jest.clearAllMocks();
