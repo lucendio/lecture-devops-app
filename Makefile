@@ -33,7 +33,7 @@ $(LOCAL_DIR)/%/:
 .PHONY: clean
 clean:
 	rm -rf \
-		"$(APP_NODE_MODULE_DIRS)" \
+		$(APP_NODE_MODULE_DIRS) \
 		"$(TEMP_DIR)" \
 		"$(LOCAL_DIR)/dist"
 
