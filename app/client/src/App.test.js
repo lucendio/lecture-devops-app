@@ -26,14 +26,6 @@ test('renders a login form', async () => {
   await waitFor(() => getByText(/Login/i));
 });
 
-test('renders a todo add', async () => {
-  const { getByText } = render(<AddToDo />);
-  await waitForElement(() => getByText(/Add/i));
-  await waitForElement(() => getByText(/ToDo Title/i));
-  await waitForElement(() => getByText(/ToDo Description/i));
-  await waitForElement(() => getByText(/Reset/i));
-});
-
 test('renders registration form when register button clicked', async () => {
   const { getByText } = render(<App />);
   await waitFor(() => getByText(/Signup/i));

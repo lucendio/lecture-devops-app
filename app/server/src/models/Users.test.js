@@ -31,19 +31,22 @@ describe( 'Model: Users', ()=>{
         expect( userRecord ).toEqual( expect.objectContaining( userInfo ) );
     });
 
-     test( 'deleting a user', async ()=>{
-                const userData = {
-                    name: 'myname',
-                    email: 'myname@example.com',
-                    password: 'mypassword'
-                };
+    test( 'deleting a user', async ()=>{
+        const userData = {
+            name: 'anothername',
+            email: 'anothername@example.com',
+            password: 'anotherpassword'
+        };
 
-                const DelOp = await Users.remove({ email: userData.email })
+        const userDoc = await Users( userData );
+        await userDoc.save();
 
-                const userRecord = await Users.findOne({ email: userData.email });
+        await Users.remove({ email: userData.email })
 
-                expect( userRecord ).toBeNull();
-            });
+        const userRecord = await Users.findOne({ email: userData.email });
+
+        expect( userRecord ).toBeNull();
+    });
 
 
     afterAll( async ()=>{
