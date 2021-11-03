@@ -22,7 +22,7 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.20",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   },
   "engines": {
     "node": "^14.15.5",
