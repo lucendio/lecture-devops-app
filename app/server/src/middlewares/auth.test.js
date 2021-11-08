@@ -48,8 +48,8 @@ describe('Testing the authorization middleware', () => {
     });
 
     test('should sent a 401 status code, if the user could not be found', async () => {
-        spyOn(jwt, 'verify').mockReturnValue(token);
-        spyOn(Users, 'findOne').mockResolvedValue(undefined);
+        jest.spyOn(jwt, 'verify').mockReturnValue(token);
+        jest.spyOn(Users, 'findOne').mockResolvedValue(undefined);
 
         await auth(mockRequest, mockResponse, nextFunction);
 
