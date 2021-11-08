@@ -36,9 +36,9 @@ It is NOT recommended to invoke `make` targets from the CI/CD, but rather to uti
 
 The following software must be installed and available in your `${PATH}`:
 
-* `node` ([NodeJS](https://nodejs.org/en/download)): latest v14
-* `npm` ([npm](https://www.npmjs.com/get-npm)): latest v6
-* `mongod` ([MongoDB](https://docs.mongodb.com/manual/installation/)): latest v4.2
+* `node` ([NodeJS](https://nodejs.org/en/download)): latest v16
+* `npm` ([npm](https://www.npmjs.com/get-npm)): latest v8
+* `mongod` ([MongoDB](https://docs.mongodb.com/manual/installation/)): latest v4.4
 
 *NOTE: the application in this repository has not been tested with versions newer than that*
 
