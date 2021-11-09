@@ -1,4 +1,5 @@
 const path = require( 'path' );
+const http = require( 'http' );
 
 const express = require('express');
 const cors = require('cors');
@@ -44,15 +45,21 @@ app.use(errorRoutes);
 
 (async function main(){
     try{
+        const server = http.createServer( app );
         await new Promise( (__ful, rej__ )=>{
-            app.listen(port, function(){
+            server.listen(port, function(){
                 console.log( `ToDo server is up on port ${ port }`);
                 __ful();
             }).on( 'error', rej__);
         });
 
-        process.on( 'SIGINT', ()=>{
-            process.exit( 2 );
+        process.on( 'SIGINT', async ()=>{
+            server.close( ()=>{
+                console.log( 'Shutting ToDo server' );
+            });
+            const dbClient = await dbClientInstance_;
+            await dbClient.disconnect();
+            process.exit( 0 );
         });
     }catch( err ){
         console.error( err );
