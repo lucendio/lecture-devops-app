@@ -36,10 +36,4 @@ mongooseInstance_
     });
 
 
-process.on( 'exit', async ()=>{
-    const dbClient = await mongooseInstance_;
-    dbClient.disconnect();
-});
-
-
 module.exports = mongooseInstance_;
