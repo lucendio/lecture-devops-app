@@ -12,6 +12,12 @@ test.skip('renders header title "ToDo App"', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
+
+test('renders div with className "test"', () => {
+  const { getByText } = render(<App />);
+  expect(getByText).toHaveClass('test');
+});
+
 test('renders a header container', () => {
   const { container } = render(<App />);
   const header = container.querySelector('.header-main')
