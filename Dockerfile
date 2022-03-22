@@ -11,6 +11,7 @@ RUN npm cache clean --force
 RUN rm -rf node_modules
 RUN npm install
 RUN npm run build
+RUN npm test
 RUN mv build /lecture-devops-app/app/server/src/public
 WORKDIR /lecture-devops-app/app/server
 RUN npm cache clean --force
