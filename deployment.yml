@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: todo
-  namespace: todo
+  name: prod
+  namespace: prod
   labels:
-    app: todo
+    app: prod
     tier: frontend
     version: v1
 data:
@@ -19,10 +19,10 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: todo
-  namespace: todo
+  name: prod
+  namespace: prod
   labels:
-    app: todo
+    app: prod
     tier: frontend
     version: v1
 data:
@@ -33,48 +33,48 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo
-  namespace: todo
+  name: prod
+  namespace: prod
 spec:
   selector:
     matchLabels:
-      app: todo
+      app: prod
       tier: frontend
       version: v1
   replicas: 1
   template:
     metadata:
       labels:
-        app: todo
+        app: prod
         tier: frontend
-        name: todo
+        name: prod
         version: v1
     spec:
       containers:
-        - name: todo
-          image: 'us-central1-docker.pkg.dev/western-mix-343614/todo/app:b99c1f8574b2b6278261def9c039458fc6317b6e'
+        - name: prod
+          image: 'us-central1-docker.pkg.dev/western-mix-343614/prod/app:b99c1f8574b2b6278261def9c039458fc6317b6e'
           ports:
             - containerPort: 3000
           imagePullPolicy: Always
           envFrom:
           - secretRef:
-              name: todo
+              name: prod
 
           env:
             - name: CLIENT
               valueFrom:
                 configMapKeyRef:
-                  name: todo
+                  name: prod
                   key: client.url
             - name: MONGODB_URL
               valueFrom:
                 configMapKeyRef:
-                  name: todo
+                  name: prod
                   key: mongo.db.url
             - name: PORT
               valueFrom:
                 configMapKeyRef:
-                  name: todo
+                  name: prod
                   key: port
                   
           
