@@ -13,10 +13,10 @@ test.skip('renders header title "ToDo App"', () => {
 });
 
 
-test('renders div with className "test"', () => {
-  const { getByText } = render(<App />);
-  expect(getByText).toHaveClass('test');
-});
+// test('renders div with className "test"', () => {
+//   const { getByText } = render(<App />);
+//   expect(getByText).toHaveClass('test');
+// });
 
 test('renders a header container', () => {
   const { container } = render(<App />);
