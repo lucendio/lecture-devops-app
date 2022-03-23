@@ -6,9 +6,6 @@ export default function Header() {
     return (
         <MDBContainer className="header-main">
             ToDo App
-            <div className='test'>
-                Test
-            </div>
         </MDBContainer>
     )
 }
