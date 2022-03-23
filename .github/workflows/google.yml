@@ -30,7 +30,7 @@ env:
 
 jobs:
   setup-build-publish-deploy:
-    name: Setup, Build, Test, Publish, and Deploy
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     environment: production
 
@@ -68,7 +68,7 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
 
-    # Build and Test the Docker image
+    # Build the Docker image
     - name: Build
       run: |-
         docker build \
