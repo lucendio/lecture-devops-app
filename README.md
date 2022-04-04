@@ -6,10 +6,9 @@ Lecture: DevOps - Application
 > unforeseen side effects like DATA LOSS !__
 
 
-This repository contains the [application](./app/README.md) that is supposed be used as *deployable workload* in the
+This repository contains the [application](./app/README.md) that can be used as *deployable workload* for the
 [project assignment](https://github.com/lucendio/lecture-devops-material/blob/master/assignments/project-work.md)
 implementation.
-Normally, the only changes that are required to be made here in order 
 
 In order to adapt the application and integrate it into your automation and deployment processes, it's usually not
 required to change any existing code. Instead, you probably just want to add some *pipeline* code or even a container
@@ -21,20 +20,21 @@ file (e.g. `Dockerfile`).
 For more information regarding the app, please take a look into its [README](./app/README.md).
 
 The `Makefile` in this directory can be seen as the main entry point for this repository. It's meant to locally run the
-application and mess around with the source code in order to better understand how it works and to be able to tear it
-apart if necessary.
-Additionally, it documents various invocations that may help you adapting this application as *workload* for the exercise. 
+application and allow to mess around with the source code in order to better understand how it works and to be able to
+tear it apart if necessary.
+Additionally, it documents various invocations that may help you adapting this application as *workload* for the
+assignment. 
 
-**_Please note, that the `Makefile` is only meant to showcase steps that are usually needed to be taken in order to
-automate the deployment lifecycle of such an application and code base.
+**_Please note, that the `Makefile` is only meant to showcase steps that are usually taken to automate the deployment
+lifecycle of such an application and code base.
 It is NOT recommended to invoke `make` targets from the CI/CD, but rather to utilize platform-specific interfaces 
-(e.g. `.gitlab-ci.yml`, `Jenkinsfile`, etc.), which may then invoke commands shown in the `make` target or in the `scripts`
- section of one of the `package.json` files._**
+(e.g. `.gitlab-ci.yml`, `Jenkinsfile`, etc.), which may then invoke commands shown in the `make` target or in the
+`scripts` section of one of the `package.json` files._**
 
 
 ### Prerequisites
 
-The following software must be installed and available in your `${PATH}`:
+The following software must be installed and available in `${PATH}`:
 
 * `node` ([NodeJS](https://nodejs.org/en/download)): latest v16
 * `npm` ([npm](https://www.npmjs.com/get-npm)): latest v8
@@ -53,22 +53,25 @@ The following commands are available from the root directory:
 
 #### `make install`
 
-* installs all dependencies via `npm` for *server* and *client*
+* installs all *server* and *client* dependencies via package manager `npm` 
 
 
 #### `make build`
 
-1. copies server source into some empty location
-2. copies dependency manifest (`package*`) into the same location right next to the server source
-3. installs server dependencies
-4. builds client code (requires client dependencies to be installed already) and puts it next to the server source into   
+1. copy server source into some empty location
+2. copy dependency manifest (`package*`) into the same location right next to the server source
+3. install server dependencies there
+4. install all client dependencies next to its source
+5. build client code and put it next to the server source (step 1)   
 
 
 #### `make test`
 
-*NOTE: requires a MongoDB service already ro be running (see `MONGODB_URL` in target on where it's assumed to be running)*
+*NOTE: requires/assumes a MongoDB service (see `MONGODB_URL`) to be reachable from the context where tests are being
+executed*
 
-* runs client & server tests in [CI mode](https://jestjs.io/docs/en/cli.html#--ci) (exits regardless of the test outcome; closed tty)
+* runs client & server tests in [CI mode](https://jestjs.io/docs/en/cli.html#--ci) (exits regardless of the test outcome;
+  closed tty)
 
 
 #### `make dev-test-client`

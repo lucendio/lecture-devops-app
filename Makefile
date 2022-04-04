@@ -45,17 +45,20 @@ build: APP_BUILD_PATH ?= $(TEMP_DIR)
 build: $(TEMP_DIR)/
 	rm -rf "$(APP_BUILD_PATH)"
 
-	cp -r "$(MKFILE_DIR)/app/server/src" "$(APP_BUILD_PATH)"
+	cp -r "$(MKFILE_DIR)"/app/server/src "$(APP_BUILD_PATH)"
 	cp "$(MKFILE_DIR)"/app/server/package* "$(APP_BUILD_PATH)/"
 	cd "$(APP_BUILD_PATH)" \
 	&& \
 		npm install --prod --no-audit --no-fund \
 		&& rm -rf ./package*
+
 	cd "$(MKFILE_DIR)/app/client" \
 	&& \
+		npm install --production=false --no-audit --no-fund \
+		&& \
 		PUBLIC_URL=$(SERVER_PUBLIC_URL) \
 		BUILD_PATH="$(APP_BUILD_PATH)/public" \
-		node ./scripts/build.js
+			node ./scripts/build.js
 
 
 .PHONY: test

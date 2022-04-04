@@ -14,6 +14,21 @@ During the build process, the client code is moved into the `./public` directory
 Aside from providing an HTTP API, the backend also functions as a static file server for the client. As a result,
 backend and frontend are both bundled into a single artifact (see `make build` as an example).
 
+If you want to build each part separately:
+
+```bash
+cd ./client
+npm install
+npm run build
+
+cd ./../server
+npm install --prod
+
+cd ./../
+cp ./client/public ./server/public
+cp ./server ${TARGET_RUNTIME_LOCATION}
+```
+
 The following technologies have been utilized (aka. MERN-stack):
 
 * React (rendering engine of the web-based graphical user interface)

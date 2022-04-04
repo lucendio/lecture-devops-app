@@ -44,7 +44,7 @@ test('api interaction', async () => {
     // mock api
     let apiMock = jest.spyOn(api, 'addTodo')
     apiMock.mockRejectedValueOnce({data: {message: "mocked api error"}});
-    
+
     // try adding the todo but the api will fail
     fireEvent.click(getByText(/add/i));
     expect(apiMock).toHaveBeenCalledWith("foo", "bar");
