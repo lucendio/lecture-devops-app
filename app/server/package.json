@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.12",
+    "mongoose": "^6.4.6",
     "validator": "^13.0.0"
   },
   "engines": {
